@@ -1,0 +1,28 @@
+{
+  "name": "kendo-react-tasks",
+  "version": "0.1.0",
+  "description": "An internal utility package exporting gulp tasks for the Kendo React components infrastructure",
+  "main": "gulp-tasks.js",
+  "keywords": [
+    "Kendo UI",
+    "React"
+  ],
+  "dependencies": {
+    "kendo-common-tasks": "telerik/kendo-common-tasks#master",
+    "babel-core": "~6",
+    "babel-loader": "^6.2.0",
+    "babel-plugin-transform-es2015-modules-umd": "~6",
+    "babel-preset-es2015": "~6",
+    "babel-preset-react": "~6",
+    "babel-preset-stage-2": "~6",
+    "babel-traverse": "6.3.19",
+    "extract-text-webpack-plugin": "^0.9.1",
+    "gulp-jasmine": "^2.2.1",
+    "react": "0.14.3",
+    "react-addons-test-utils": "0.14.3",
+    "react-dom": "0.14.3",
+    "skin-deep": "^0.13.0"
+  },
+  "author": "Telerik",
+  "license": "Apache-2.0"
+}
