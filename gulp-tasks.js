@@ -1,4 +1,5 @@
 const jasmine = require('gulp-jasmine')
+const specReporter = require('jasmine-spec-reporter')
 const webpackConfig = require('./webpack.config.js')
 const commonTasks = require('kendo-common-tasks');
 
@@ -13,7 +14,9 @@ module.exports = function(gulp, libraryName) {
     gulp.src(TESTS)
       .pipe(commonTasks.webpackStream(webpackConfig.test))
       .pipe(gulp.dest('tmp/test/'))
-      .pipe(jasmine())
+      .pipe(jasmine({
+        reporter: new specReporter()
+      }))
   )
 
   gulp.task('watch-test', () => {

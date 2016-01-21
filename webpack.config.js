@@ -60,6 +60,11 @@ module.exports = {
   test: {
     resolve,
 
+    externals: {
+      'react/lib/ExecutionEnvironment': true,
+      "cheerio": "global"
+    },
+
     plugins: [
       // skin deep needs this
       // https://github.com/glenjamin/skin-deep#errors-when-bundling

@@ -8,7 +8,6 @@
     "React"
   ],
   "dependencies": {
-    "kendo-common-tasks": "telerik/kendo-common-tasks#master",
     "babel-core": "~6",
     "babel-loader": "^6.2.0",
     "babel-plugin-transform-es2015-modules-umd": "~6",
@@ -16,12 +15,15 @@
     "babel-preset-react": "~6",
     "babel-preset-stage-2": "~6",
     "babel-traverse": "6.3.19",
+    "enzyme": "^2.0.0-rc1",
     "extract-text-webpack-plugin": "^0.9.1",
     "gulp-jasmine": "^2.2.1",
+    "jasmine-reporters": "^2.1.1",
+    "jasmine-spec-reporter": "^2.4.0",
+    "kendo-common-tasks": "telerik/kendo-common-tasks#master",
     "react": "0.14.3",
-    "react-addons-test-utils": "0.14.3",
-    "react-dom": "0.14.3",
-    "skin-deep": "^0.13.0"
+    "react-addons-test-utils": "^0.14.3",
+    "react-dom": "^0.14.3"
   },
   "author": "Telerik",
   "license": "Apache-2.0"
