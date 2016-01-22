@@ -5,7 +5,7 @@ const commonTasks = require('kendo-common-tasks');
 
 const SRC = "src/*.jsx"
 const TESTS = "test/*.jsx"
-const SRC_TESTS = [SRC, TESTS]
+const SRC_TESTS = [ SRC, TESTS ]
 
 module.exports = function(gulp, libraryName) {
   commonTasks.addTasks(gulp, libraryName, SRC, webpackConfig)
@@ -21,6 +21,6 @@ module.exports = function(gulp, libraryName) {
 
   gulp.task('watch-test', () => {
     gulp.run('test')
-    return gulp.watch(SRC_TESTS, ['test']);
+    return gulp.watch(SRC_TESTS, [ 'test' ]);
   })
 }

@@ -1,7 +1,7 @@
 const commonTasks = require('kendo-common-tasks')
 const path = require('path')
 
-const sourceExtensions = ['.jsx']
+const sourceExtensions = [ '.jsx' ]
 const nodeModulesPath = path.join(__dirname, 'node_modules')
 
 const resolve = commonTasks.resolveConfig(sourceExtensions, nodeModulesPath)
@@ -33,7 +33,7 @@ module.exports = {
     ],
 
     module: {
-      loaders: [babelLoader, commonTasks.CDNSassLoader]
+      loaders: [ babelLoader, commonTasks.CDNSassLoader ]
     }
   }, // CDN
 
@@ -42,18 +42,18 @@ module.exports = {
 
     output: {libraryTarget: 'commonjs'},
 
-    externals: ['react', 'react-dom', /^\.\//],
+    externals: [ 'react', 'react-dom', /^\.\// ],
 
-    plugins: [commonTasks.extractCssPlugin()],
+    plugins: [ commonTasks.extractCssPlugin() ],
 
     module: {
-      loaders: [babelLoader, commonTasks.npmPackageSassLoader]
+      loaders: [ babelLoader, commonTasks.npmPackageSassLoader ]
     }
   }, // npmPackage
 
   dev: commonTasks.webpackDevConfig({
     resolve,
-    loaders: [babelLoader],
+    loaders: [ babelLoader ],
     entries: 'examples/*.jsx'
   }), // dev
 
