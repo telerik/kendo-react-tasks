@@ -2,6 +2,7 @@
   "name": "kendo-react-tasks",
   "version": "0.1.0",
   "description": "An internal utility package exporting gulp tasks for the Kendo React components infrastructure",
+  "repository": "telerik/kendo-react-tasks",
   "main": "gulp-tasks.js",
   "keywords": [
     "Kendo UI",
