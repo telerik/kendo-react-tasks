@@ -21,7 +21,7 @@
     "jasmine-reporters": "^2.1.1",
     "jasmine-spec-reporter": "^2.4.0",
     "kendo-common-tasks": "telerik/kendo-common-tasks#master",
-    "react": "0.14.3",
+    "react": "^0.14.3",
     "react-addons-test-utils": "^0.14.3",
     "react-dom": "^0.14.3"
   },
