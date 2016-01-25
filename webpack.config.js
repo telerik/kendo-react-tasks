@@ -1,4 +1,4 @@
-const commonTasks = require('kendo-common-tasks');
+const commonTasks = require('@telerik/kendo-common-tasks');
 const path = require('path');
 
 const sourceExtensions = [ '.jsx' ];
