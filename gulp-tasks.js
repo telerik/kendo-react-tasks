@@ -1,7 +1,7 @@
 const jasmine = require('gulp-jasmine');
 const specReporter = require('jasmine-spec-reporter');
 const webpackConfig = require('./webpack.config.js');
-const commonTasks = require('kendo-common-tasks');
+const commonTasks = require('@telerik/kendo-common-tasks');
 
 const SRC = "src/*.jsx";
 const TESTS = "test/*.jsx";
