@@ -1,10 +1,10 @@
-const commonTasks = require('kendo-common-tasks')
-const path = require('path')
+const commonTasks = require('kendo-common-tasks');
+const path = require('path');
 
-const sourceExtensions = [ '.jsx' ]
-const nodeModulesPath = path.join(__dirname, 'node_modules')
+const sourceExtensions = [ '.jsx' ];
+const nodeModulesPath = path.join(__dirname, 'node_modules');
 
-const resolve = commonTasks.resolveConfig(sourceExtensions, nodeModulesPath)
+const resolve = commonTasks.resolveConfig(sourceExtensions, nodeModulesPath);
 
 const babelLoader = {
   test: /\.jsx?$/,
@@ -17,7 +17,7 @@ const babelLoader = {
       require.resolve('babel-preset-es2015')
     ]
   }
-}
+};
 
 module.exports = {
   CDN: {
@@ -79,4 +79,4 @@ module.exports = {
     }
   } // test
 
-} // module.exports
+}; // module.exports

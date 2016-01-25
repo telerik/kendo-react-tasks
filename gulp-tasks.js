@@ -1,14 +1,14 @@
-const jasmine = require('gulp-jasmine')
-const specReporter = require('jasmine-spec-reporter')
-const webpackConfig = require('./webpack.config.js')
+const jasmine = require('gulp-jasmine');
+const specReporter = require('jasmine-spec-reporter');
+const webpackConfig = require('./webpack.config.js');
 const commonTasks = require('kendo-common-tasks');
 
-const SRC = "src/*.jsx"
-const TESTS = "test/*.jsx"
-const SRC_TESTS = [ SRC, TESTS ]
+const SRC = "src/*.jsx";
+const TESTS = "test/*.jsx";
+const SRC_TESTS = [ SRC, TESTS ];
 
 module.exports = function(gulp, libraryName) {
-  commonTasks.addTasks(gulp, libraryName, SRC, webpackConfig)
+  commonTasks.addTasks(gulp, libraryName, SRC, webpackConfig);
 
   gulp.task('test', () =>
     gulp.src(TESTS)
@@ -17,10 +17,10 @@ module.exports = function(gulp, libraryName) {
       .pipe(jasmine({
         reporter: new specReporter()
       }))
-  )
+  );
 
   gulp.task('watch-test', () => {
-    gulp.run('test')
+    gulp.run('test');
     return gulp.watch(SRC_TESTS, [ 'test' ]);
-  })
-}
+  });
+};

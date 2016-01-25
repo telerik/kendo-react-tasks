@@ -12,6 +12,7 @@
     "React"
   ],
   "dependencies": {
+    "@telerik/eslint-config": "telerik/eslint-config-kendo#master",
     "babel-core": "~6",
     "babel-loader": "^6.2.0",
     "babel-plugin-transform-es2015-modules-umd": "~6",
