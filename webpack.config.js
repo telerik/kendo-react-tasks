@@ -10,6 +10,9 @@ const babelLoader = {
   test: /\.jsx?$/,
   exclude: /(node_modules|bower_components)/,
   loader: require.resolve('babel-loader'),
+  plugins: [
+    require.resolve('babel-plugin-add-module-exports')
+  ],
   query: {
     presets: [
       require.resolve('babel-preset-stage-2'),
@@ -40,7 +43,7 @@ module.exports = {
   npmPackage: {
     resolve,
 
-    output: {libraryTarget: 'commonjs'},
+    output: {libraryTarget: 'commonjs2'},
 
     externals: [ 'react', 'react-dom', /^\.\// ],
 

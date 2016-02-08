@@ -33,6 +33,7 @@
   "author": "Telerik",
   "license": "Apache-2.0",
   "devDependencies": {
+    "babel-plugin-add-module-exports": "^0.1.2",
     "cz-conventional-changelog": "^1.1.5",
     "ghooks": "^1.0.3",
     "validate-commit-msg": "^1.1.1"
