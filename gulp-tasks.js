@@ -4,7 +4,7 @@ const webpackConfig = require('./webpack.config.js');
 const commonTasks = require('@telerik/kendo-common-tasks');
 
 const SRC = "src/*.jsx";
-const TESTS = "test/*.jsx";
+const TESTS = "test/**/*.jsx";
 const SRC_TESTS = [ SRC, TESTS ];
 
 module.exports = function(gulp, libraryName) {
