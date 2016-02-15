@@ -7,79 +7,79 @@ const nodeModulesPath = path.join(__dirname, 'node_modules');
 const resolve = commonTasks.resolveConfig(sourceExtensions, nodeModulesPath);
 
 const babelLoader = {
-  test: /\.jsx?$/,
-  exclude: /(node_modules|bower_components)/,
-  loader: require.resolve('babel-loader'),
-  plugins: [
-    require.resolve('babel-plugin-add-module-exports')
-  ],
-  query: {
-    presets: [
-      require.resolve('babel-preset-stage-2'),
-      require.resolve('babel-preset-react'),
-      require.resolve('babel-preset-es2015')
-    ]
-  }
+    test: /\.jsx?$/,
+    exclude: /(node_modules|bower_components)/,
+    loader: require.resolve('babel-loader'),
+    plugins: [
+        require.resolve('babel-plugin-add-module-exports')
+    ],
+    query: {
+        presets: [
+            require.resolve('babel-preset-stage-2'),
+            require.resolve('babel-preset-react'),
+            require.resolve('babel-preset-es2015')
+        ]
+    }
 };
 
 module.exports = {
-  CDN: {
-    resolve,
+    CDN: {
+        resolve,
 
-    output: {libraryTarget: 'umd'},
+        output: { libraryTarget: 'umd' },
 
-    externals: {"react": "React", "react-dom": "ReactDOM"},
+        externals: { "react": "React", "react-dom": "ReactDOM" },
 
-    plugins: [
-      commonTasks.extractCssPlugin(),
-      commonTasks.uglifyJsPlugin()
-    ],
+        plugins: [
+            commonTasks.extractCssPlugin(),
+            commonTasks.uglifyJsPlugin()
+        ],
 
-    module: {
-      loaders: [ babelLoader, commonTasks.CDNSassLoader ]
-    }
-  }, // CDN
+        module: {
+            loaders: [ babelLoader, commonTasks.CDNSassLoader ]
+        }
+    }, // CDN
 
-  npmPackage: {
-    resolve,
+    npmPackage: {
+        resolve,
 
-    output: {libraryTarget: 'commonjs2'},
+        output: { libraryTarget: 'commonjs2' },
 
-    externals: [ 'react', 'react-dom', 'react-addons-css-transition-group', /^\.\// ],
+        externals: [ 'react', 'react-dom', 'react-addons-css-transition-group', /^\.\// ],
 
-    plugins: [ commonTasks.extractCssPlugin() ],
+        plugins: [ commonTasks.extractCssPlugin() ],
 
-    module: {
-      loaders: [ babelLoader, commonTasks.npmPackageSassLoader ]
-    }
-  }, // npmPackage
+        module: {
+            loaders: [ babelLoader, commonTasks.npmPackageSassLoader ]
+        }
+    }, // npmPackage
 
-  dev: commonTasks.webpackDevConfig({
-    resolve,
-    loaders: [ babelLoader ],
-    entries: 'examples/*.jsx'
-  }), // dev
+    dev: commonTasks.webpackDevConfig({
+        resolve,
+        loaders: [ babelLoader ],
+        entries: 'examples/*.jsx'
+    }), // dev
 
-  test: {
-    resolve,
+    test: {
+        resolve,
 
-    externals: {
-      'react/lib/ExecutionEnvironment': true,
-      "cheerio": "global"
-    },
+        externals: {
+            'react/lib/ExecutionEnvironment': true,
+            "cheerio": "global"
+        },
 
-    plugins: [
-      // skin deep needs this
-      // https://github.com/glenjamin/skin-deep#errors-when-bundling
-      new commonTasks.webpack.IgnorePlugin(/ReactContext/)
-    ],
+        plugins: [
+            // skin deep needs this
+            // https://github.com/glenjamin/skin-deep#errors-when-bundling
+            new commonTasks.webpack.IgnorePlugin(/ReactContext/)
+        ],
 
-    module: {
-      loaders: [
-        babelLoader,
-        {test: /\.scss$/, loader: require.resolve('./stub-loader')}
-      ]
-    }
-  } // test
+        module: {
+            loaders: [
+                babelLoader,
+                { test: /\.scss$/, loader: require.resolve('./stub-loader') }
+            ]
+        }
+    } // test
 
 }; // module.exports
