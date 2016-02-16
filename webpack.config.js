@@ -15,9 +15,9 @@ const babelLoader = {
     ],
     query: {
         presets: [
-            require.resolve('babel-preset-stage-2'),
             require.resolve('babel-preset-react'),
-            require.resolve('babel-preset-es2015')
+            require.resolve('babel-preset-es2015'),
+            require.resolve('babel-preset-stage-1') // Note: stage-1 should be after es2015 in order to work
         ]
     }
 };
