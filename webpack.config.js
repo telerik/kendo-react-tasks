@@ -61,7 +61,10 @@ module.exports = {
     }), // dev
 
     test: {
-        resolve,
+        resolve: Object.assign({}, resolve, { alias: {
+            "windowStub": require.resolve("./window-stub.js"),
+            "documentStub": require.resolve("./document-stub.js")
+        } }),
 
         externals: {
             'react/lib/ExecutionEnvironment': true,
@@ -71,7 +74,11 @@ module.exports = {
         plugins: [
             // skin deep needs this
             // https://github.com/glenjamin/skin-deep#errors-when-bundling
-            new commonTasks.webpack.IgnorePlugin(/ReactContext/)
+            new commonTasks.webpack.IgnorePlugin(/ReactContext/),
+            new commonTasks.webpack.ProvidePlugin({
+                "window": "windowStub",
+                "document": "documentStub"
+            })
         ],
 
         module: {
