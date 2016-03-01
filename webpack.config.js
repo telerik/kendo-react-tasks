@@ -84,9 +84,39 @@ module.exports = {
         module: {
             loaders: [
                 babelLoader,
-                { test: /\.scss$/, loader: require.resolve('./stub-loader') }
+                commonTasks.inlineSassLoader
             ]
         }
-    } // test
+    }, // test
+
+    e2e: {
+        resolve: {
+            cache: false,
+            fallback: resolve.fallback,
+            alias: {
+                "./e2e": process.cwd() + "/e2e"
+            },
+            extensions: [ '', '.jsx', '.js', '.json', '.scss' ]
+        },
+        devtool: 'inline-source-map',
+        module: {
+            preLoaders: [
+                {
+                    test: /\.js$/,
+                    loader: require.resolve("source-map-loader")
+                }
+            ],
+            loaders: [
+                babelLoader,
+                { test: /\.json$/, loader: require.resolve('json-loader') },
+                commonTasks.inlineSassLoader
+            ]
+        },
+        stats: { colors: true, reasons: true },
+        debug: false,
+        plugins: [
+            new commonTasks.webpack.ContextReplacementPlugin(/\.\/e2e/, process.cwd() + '/e2e')
+        ]
+    }
 
 }; // module.exports

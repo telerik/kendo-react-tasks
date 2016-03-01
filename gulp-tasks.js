@@ -1,7 +1,11 @@
 const jasmine = require('gulp-jasmine');
+const path = require('path');
 const specReporter = require('jasmine-spec-reporter');
 const webpackConfig = require('./webpack.config.js');
 const commonTasks = require('@telerik/kendo-common-tasks');
+
+const KarmaServer = require('karma').Server;
+const karmaConfigPath = path.join(__dirname, 'karma.conf.js');
 
 const SRC = "src/*.jsx";
 const TESTS = "test/**/*.jsx";
@@ -22,5 +26,12 @@ module.exports = function(gulp, libraryName) {
     gulp.task('watch-test', () => {
         gulp.run('test');
         return gulp.watch(SRC_TESTS, [ 'test' ]);
+    });
+
+    gulp.task('e2e', (done) => {
+        new KarmaServer({
+            configFile: karmaConfigPath,
+            singleRun: true
+        }, () => { done(); }).start();
     });
 };
