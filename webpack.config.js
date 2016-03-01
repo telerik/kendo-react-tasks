@@ -94,7 +94,8 @@ module.exports = {
             cache: false,
             fallback: resolve.fallback,
             alias: {
-                "./e2e": process.cwd() + "/e2e"
+                "./e2e": process.cwd() + "/e2e",
+                "e2e-utils": require.resolve("./e2e-utils.js")
             },
             extensions: [ '', '.jsx', '.js', '.json', '.scss' ]
         },
