@@ -1,6 +1,8 @@
-import $ from 'jquery';
-import chai, { expect } from 'chai';
-import chaiJquery from 'chai-jquery';
+const $ = require('jquery');
+const chai = require('chai');
+const chaiJquery = require('chai-jquery');
+
+const expect = chai.expect;
 
 global.jQuery = $;
 
@@ -17,4 +19,5 @@ function withRoot(closure) {
     };
 }
 
-export { $, expect, withRoot };
+module.exports = { $, expect, withRoot };
+
