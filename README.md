@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/telerik/kendo-react-tasks.svg?branch=master)](https://travis-ci.org/telerik/kendo-react-tasks)
+[![npm version](https://badge.fury.io/js/%40telerik%2Fkendo-react-tasks.svg)](https://badge.fury.io/js/%40telerik%2Fkendo-react-tasks)
+
 An internal utility package exporting gulp tasks for the Kendo React components infrastructure.
 
  - `gulp test` - runs the tests (single run);
