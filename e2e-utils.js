@@ -1,8 +1,9 @@
-const $ = require('jquery');
-const chai = require('chai');
-const chaiJquery = require('chai-jquery');
+/*eslint no-var: 0 */
+var $ = require('jquery');
+var chai = require('chai');
+var chaiJquery = require('chai-jquery');
 
-const expect = chai.expect;
+var expect = chai.expect;
 
 global.jQuery = $;
 
@@ -10,14 +11,20 @@ chai.should();
 chai.use(chaiJquery);
 
 function withRoot(closure) {
-    return () => {
-        const root = $("<div />").appendTo(document.body);
+    return function() {
+        var root = $("<div />").appendTo(document.body);
 
-        afterEach(() => root.empty());
+        afterEach(function() {
+            root.empty();
+        });
 
         closure(root);
     };
 }
 
-module.exports = { $, expect, withRoot };
+module.exports = {
+    "$": $,
+    "expect": expect,
+    "withRoot": withRoot
+};
 
