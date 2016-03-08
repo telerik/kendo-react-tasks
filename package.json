@@ -1,11 +1,14 @@
 {
   "name": "@telerik/kendo-react-tasks",
-  "version": "0.1.0",
   "description": "An internal utility package exporting gulp tasks for the Kendo React components infrastructure",
-  "repository": "telerik/kendo-react-tasks",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/telerik/kendo-react-tasks.git"
+  },
   "main": "gulp-tasks.js",
   "scripts": {
-    "lint": "./node_modules/.bin/eslint ."
+    "lint": "./node_modules/.bin/eslint .",
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
   "keywords": [
     "Kendo UI",
@@ -13,7 +16,7 @@
   ],
   "dependencies": {
     "@telerik/eslint-config": "1.1.0",
-    "@telerik/kendo-common-tasks": "telerik/kendo-common-tasks#master",
+    "@telerik/kendo-common-tasks": "~1.0.0",
     "babel-core": "~6",
     "babel-loader": "^6.2.0",
     "babel-plugin-add-module-exports": "^0.1.2",
@@ -48,7 +51,8 @@
   "devDependencies": {
     "cz-conventional-changelog": "^1.1.5",
     "ghooks": "^1.0.3",
-    "validate-commit-msg": "^1.1.1"
+    "validate-commit-msg": "^1.1.1",
+    "semantic-release": "^4.3.5"
   },
   "config": {
     "commitizen": {
