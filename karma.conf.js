@@ -1,6 +1,10 @@
 module.exports = function(config) {
     const e2eWebpackConfig = require('./webpack.config.js').e2e;
 
+    const USE_SANDBOXED_CHROME = process.env['TRAVIS'];
+
+    const browsers = USE_SANDBOXED_CHROME ? [ 'TravisCI' ] : [ 'Chrome' ];
+
     config.set({
 
         // base path that will be used to resolve all patterns (e.g. files, exclude)
@@ -44,9 +48,7 @@ module.exports = function(config) {
         // enable / disable watching file and executing tests whenever any file changes
         autoWatch: false,
 
-        // start these browsers
-        // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-        browsers: [ 'TravisCI' ],
+        browsers: browsers,
 
         customLaunchers: {
             TravisCI: {
