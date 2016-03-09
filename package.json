@@ -1,6 +1,7 @@
 {
   "name": "@telerik/kendo-react-tasks",
   "description": "An internal utility package exporting gulp tasks for the Kendo React components infrastructure",
+  "version": "0.0.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/telerik/kendo-react-tasks.git"
