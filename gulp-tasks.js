@@ -32,6 +32,12 @@ module.exports = function(gulp, libraryName) {
         new KarmaServer({
             configFile: karmaConfigPath,
             singleRun: true
-        }, () => { done(); }).start();
+        }, function(exitStatus) {
+            if (exitStatus !== 0) {
+                done("e2e suite failed");
+            } else {
+                done();
+            }
+        }).start();
     });
 };
