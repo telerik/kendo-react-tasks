@@ -84,7 +84,8 @@ module.exports = {
         module: {
             loaders: [
                 babelLoader,
-                commonTasks.inlineSassLoader
+                commonTasks.inlineSassLoader,
+                { test: /\.(ttf|eot|svg|woff|woff2|jpe?g|png|gif|svg)$/i, loader: require.resolve('./stub-loader.js') }
             ]
         }
     }, // test
@@ -110,6 +111,7 @@ module.exports = {
             loaders: [
                 babelLoader,
                 { test: /\.json$/, loader: require.resolve('json-loader') },
+                { test: /\.(ttf|eot|svg|woff|woff2|jpe?g|png|gif|svg)$/i, loader: require.resolve('./stub-loader.js') },
                 commonTasks.inlineSassLoader
             ]
         },
