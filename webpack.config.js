@@ -36,7 +36,10 @@ module.exports = {
         ],
 
         module: {
-            loaders: [ babelLoader, commonTasks.CDNSassLoader ]
+            loaders: [
+                babelLoader,
+                commonTasks.CDNSassLoader
+            ].concat(commonTasks.resourceLoaders)
         }
     }, // CDN
 
