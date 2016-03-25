@@ -7,7 +7,7 @@ const commonTasks = require('@telerik/kendo-common-tasks');
 const KarmaServer = require('karma').Server;
 const karmaConfigPath = path.join(__dirname, 'karma.conf.js');
 
-const SRC = "src/*.jsx";
+const SRC = "src/**/*.jsx";
 const TESTS = "test/**/*.jsx";
 const SRC_TESTS = [ SRC, TESTS ];
 
