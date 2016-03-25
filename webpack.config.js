@@ -53,7 +53,10 @@ module.exports = {
         plugins: [ commonTasks.extractCssPlugin() ],
 
         module: {
-            loaders: [ babelLoader, commonTasks.npmPackageSassLoader ]
+            loaders: [
+                babelLoader,
+                commonTasks.npmPackageSassLoader
+            ].concat(commonTasks.resourceLoaders)
         }
     }, // npmPackage
 
