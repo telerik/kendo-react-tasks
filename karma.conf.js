@@ -1,5 +1,4 @@
-module.exports = function(config) {
-    const e2eWebpackConfig = require('./webpack.config.js').e2e;
+module.exports = function(config, e2eWebpackConfig) {
 
     const USE_SANDBOXED_CHROME = process.env['TRAVIS'];
 

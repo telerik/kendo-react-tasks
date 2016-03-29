@@ -6,6 +6,8 @@ const nodeModulesPath = path.join(__dirname, 'node_modules');
 
 const resolve = commonTasks.resolveConfig(sourceExtensions, nodeModulesPath);
 
+const packageInfo = require(path.join(process.cwd(), 'package.json'));
+
 const babelLoader = {
     test: /\.jsx?$/,
     exclude: /(node_modules|bower_components)/,
@@ -102,7 +104,41 @@ module.exports = {
             fallback: resolve.fallback,
             alias: {
                 "./e2e": process.cwd() + "/e2e",
-                "e2e-utils": require.resolve("./e2e-utils.js")
+                "e2e-utils": require.resolve("./e2e-utils.js"),
+                [packageInfo.name]: '../src/main'
+            },
+            extensions: [ '', '.jsx', '.js', '.json', '.scss' ]
+        },
+        devtool: 'inline-source-map',
+        module: {
+            preLoaders: [
+                {
+                    test: /\.js$/,
+                    loader: require.resolve("source-map-loader")
+                }
+            ],
+            loaders: [
+                babelLoader,
+                { test: /\.json$/, loader: require.resolve('json-loader') },
+                { test: /\.(ttf|eot|svg|woff|woff2|jpe?g|png|gif|svg)$/i, loader: require.resolve('./stub-loader.js') },
+                commonTasks.inlineSassLoader
+            ]
+        },
+        stats: { colors: true, reasons: true },
+        debug: false,
+        plugins: [
+            new commonTasks.webpack.ContextReplacementPlugin(/\.\/e2e/, process.cwd() + '/e2e')
+        ]
+    },
+
+    e2eNpmPackage: {
+        resolve: {
+            cache: false,
+            fallback: resolve.fallback,
+            alias: {
+                "./e2e": process.cwd() + "/e2e",
+                "e2e-utils": require.resolve("./e2e-utils.js"),
+                [packageInfo.name]: '../dist/npm/js/main'
             },
             extensions: [ '', '.jsx', '.js', '.json', '.scss' ]
         },
@@ -127,5 +163,6 @@ module.exports = {
             new commonTasks.webpack.ContextReplacementPlugin(/\.\/e2e/, process.cwd() + '/e2e')
         ]
     }
+
 
 }; // module.exports
