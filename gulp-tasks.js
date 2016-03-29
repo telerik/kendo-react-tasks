@@ -5,7 +5,7 @@ const webpackConfig = require('./webpack.config.js');
 const commonTasks = require('@telerik/kendo-common-tasks');
 
 const KarmaServer = require('karma').Server;
-const karmaConfigPath = path.join(__dirname, 'karma.conf.js');
+const e2eConfigPath = path.join(__dirname, 'e2e.conf.js');
 
 const SRC = "src/**/*.jsx";
 const TESTS = "test/**/*.jsx";
@@ -30,7 +30,7 @@ module.exports = function(gulp, libraryName) {
 
     gulp.task('e2e', (done) => {
         new KarmaServer({
-            configFile: karmaConfigPath,
+            configFile: e2eConfigPath,
             singleRun: true
         }, function(exitStatus) {
             if (exitStatus !== 0) {
