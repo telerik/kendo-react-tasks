@@ -138,7 +138,7 @@ module.exports = {
             alias: {
                 "./e2e": process.cwd() + "/e2e",
                 "e2e-utils": require.resolve("./e2e-utils.js"),
-                [packageInfo.name]: '../src/main'
+                [packageInfo.name]: '../dist/npm/js/main'
             },
             extensions: [ '', '.jsx', '.js', '.json', '.scss' ]
         },
