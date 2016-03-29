@@ -6,6 +6,8 @@ const nodeModulesPath = path.join(__dirname, 'node_modules');
 
 const resolve = commonTasks.resolveConfig(sourceExtensions, nodeModulesPath);
 
+const packageInfo = require(path.join(process.cwd(), 'package.json'));
+
 const babelLoader = {
     test: /\.jsx?$/,
     exclude: /(node_modules|bower_components)/,
@@ -102,7 +104,8 @@ module.exports = {
             fallback: resolve.fallback,
             alias: {
                 "./e2e": process.cwd() + "/e2e",
-                "e2e-utils": require.resolve("./e2e-utils.js")
+                "e2e-utils": require.resolve("./e2e-utils.js"),
+                [packageInfo.name]: '../src/main'
             },
             extensions: [ '', '.jsx', '.js', '.json', '.scss' ]
         },
