@@ -48,7 +48,7 @@ module.exports = {
 
         output: { libraryTarget: 'commonjs2' },
 
-        externals: [ 'react', 'react-dom', 'react-addons-css-transition-group' ],
+        externals: [ 'react', 'react-dom', 'react-addons-css-transition-group', /^\.\// ],
 
         plugins: [ commonTasks.extractCssPlugin() ],
 
