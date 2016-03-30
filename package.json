@@ -17,7 +17,7 @@
   ],
   "dependencies": {
     "@telerik/eslint-config": "1.1.0",
-    "@telerik/kendo-common-tasks": "^1.0.0",
+    "@telerik/kendo-common-tasks": "^1.4.1",
     "babel-core": "~6",
     "babel-loader": "^6.2.0",
     "babel-plugin-add-module-exports": "^0.1.2",
