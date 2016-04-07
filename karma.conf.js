@@ -45,7 +45,7 @@ module.exports = function(config, e2eWebpackConfig) {
         logLevel: config.LOG_INFO,
 
         // enable / disable watching file and executing tests whenever any file changes
-        autoWatch: false,
+        autoWatch: true,
 
         browsers: browsers,
 
@@ -54,11 +54,6 @@ module.exports = function(config, e2eWebpackConfig) {
                 base: "Chrome",
                 flags: [ '--no-sandbox' ]
             }
-        },
-
-        // Continuous Integration mode
-        // if true, Karma captures browsers, runs the tests and exits
-        singleRun: true
+        }
     });
-
 };

@@ -12,10 +12,10 @@ const SRC = "src/**/*.jsx";
 const TESTS = "test/**/*.jsx";
 const SRC_TESTS = [ SRC, TESTS ];
 
-const karmaStart = (done, confPath) => (
+const karmaStart = (done, confPath, singleRun) => (
     new KarmaServer({
-        configFile: confPath,
-        singleRun: true
+        singleRun: singleRun,
+        configFile: confPath
     }, function(exitStatus) {
         if (exitStatus !== 0) {
             done("e2e suite failed");
@@ -42,8 +42,9 @@ module.exports = function(gulp, libraryName) {
         return gulp.watch(SRC_TESTS, [ 'test' ]);
     });
 
-    gulp.task('e2e', (done) => karmaStart(done, e2eConfigPath));
+    gulp.task('e2e', (done) => karmaStart(done, e2eConfigPath, true));
+    gulp.task('watch-e2e', (done) => karmaStart(done, e2eConfigPath, false));
 
     gulp.task('e2e-npm', [ 'build-npm-package' ],
-              (done) => karmaStart(done, e2eNpmConfigPath));
+              (done) => karmaStart(done, e2eNpmConfigPath, true));
 };
