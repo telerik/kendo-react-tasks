@@ -4,26 +4,12 @@ const specReporter = require('jasmine-spec-reporter');
 const webpackConfig = require('./webpack.config.js');
 const commonTasks = require('@telerik/kendo-common-tasks');
 
-const KarmaServer = require('karma').Server;
 const e2eConfigPath = path.join(__dirname, 'e2e.conf.js');
 const e2eNpmConfigPath = path.join(__dirname, 'e2e-npm.conf.js');
 
 const SRC = "src/**/*.jsx";
 const TESTS = "test/**/*.jsx";
 const SRC_TESTS = [ SRC, TESTS ];
-
-const karmaStart = (done, confPath, singleRun) => (
-    new KarmaServer({
-        singleRun: singleRun,
-        configFile: confPath
-    }, function(exitStatus) {
-        if (exitStatus !== 0) {
-            done("e2e suite failed");
-        } else {
-            done();
-        }
-    }).start()
-);
 
 module.exports = function(gulp, libraryName) {
     commonTasks.addTasks(gulp, libraryName, SRC, webpackConfig);
@@ -42,9 +28,10 @@ module.exports = function(gulp, libraryName) {
         return gulp.watch(SRC_TESTS, [ 'test' ]);
     });
 
-    gulp.task('e2e', (done) => karmaStart(done, e2eConfigPath, true));
-    gulp.task('watch-e2e', (done) => karmaStart(done, e2eConfigPath, false));
+    gulp.task('e2e', (done) => commonTasks.startKarma(done, e2eConfigPath, true));
+
+    gulp.task('watch-e2e', (done) => commonTasks.startKarma(done, e2eConfigPath, false));
 
     gulp.task('e2e-npm', [ 'build-npm-package' ],
-              (done) => karmaStart(done, e2eNpmConfigPath, true));
+              (done) => commonTasks.startKarma(done, e2eNpmConfigPath, true));
 };
