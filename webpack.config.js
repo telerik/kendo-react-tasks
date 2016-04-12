@@ -33,8 +33,16 @@ module.exports = {
 
         output: { libraryTarget: 'umd' },
 
-        externals: { "react": "React", "react-dom": "ReactDOM" },
-
+        externals: {
+            "react": "React",
+            "react-dom": "ReactDOM",
+            "react-addons-transition-group": {
+                "root": [ "React","addons", "TransitionGroup" ],
+                "commonjs": true,
+                "commonjs2": true,
+                "amd": true
+            }
+        },
         plugins: [
             commonTasks.extractCssPlugin(),
             commonTasks.uglifyJsPlugin()
