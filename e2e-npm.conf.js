@@ -1,6 +1,4 @@
-const path = require('path');
-const karmaConfigPath = path.join(__dirname, 'karma.conf.js');
+const commonTasks = require('@telerik/kendo-common-tasks');
 
-const e2eWebpackConfig = require('./webpack.config.js').e2eNpmPackage;
-
-module.exports = (config) => require(karmaConfigPath)(config, e2eWebpackConfig);
+module.exports = (config) =>
+    commonTasks.karmaConfig(config, require('./webpack.config.js').e2eNpmPackage, 'e2e-bundle.js');
