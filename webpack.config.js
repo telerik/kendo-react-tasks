@@ -27,6 +27,10 @@ const babelLoader = {
     }
 };
 
+const packageDependencies = () => (
+    Object.keys(packageInfo["dependencies"]).filter(x => x !== "@telerik/kendo-theme-default")
+);
+
 module.exports = {
     CDN: {
         resolve,
@@ -67,7 +71,7 @@ module.exports = {
 
         output: { libraryTarget: 'commonjs2' },
 
-        externals: [ 'react', 'react-dom', 'react-addons-css-transition-group', /^\.\// ],
+        externals: [ 'react', 'react-dom', 'react-addons-css-transition-group', /^\.\// ].concat(packageDependencies()),
 
         plugins: [ commonTasks.extractCssPlugin() ],
 
