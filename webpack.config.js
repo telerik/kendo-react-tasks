@@ -32,7 +32,7 @@ const packageDependencies = () => (
 );
 
 module.exports = {
-    CDN: {
+    CDN: commonTasks.webpackThemeConfig({ extract: true }, {
         resolve,
 
         output: { libraryTarget: 'umd' },
@@ -54,34 +54,25 @@ module.exports = {
             }
         },
         plugins: [
-            commonTasks.extractCssPlugin(),
             commonTasks.uglifyJsPlugin()
         ],
 
         module: {
-            loaders: [
-                babelLoader,
-                commonTasks.CDNSassLoader
-            ].concat(commonTasks.resourceLoaders)
+            loaders: [ babelLoader ]
         }
-    }, // CDN
+    }), // CDN
 
-    npmPackage: {
+    npmPackage: commonTasks.webpackThemeConfig({ extract: true }, {
         resolve,
 
         output: { libraryTarget: 'commonjs2' },
 
         externals: [ 'react', 'react-dom', 'react-addons-css-transition-group', /^\.\// ].concat(packageDependencies()),
 
-        plugins: [ commonTasks.extractCssPlugin() ],
-
         module: {
-            loaders: [
-                babelLoader,
-                commonTasks.npmPackageSassLoader
-            ].concat(commonTasks.resourceLoaders)
+            loaders: [ babelLoader ]
         }
-    }, // npmPackage
+    }), // npmPackage
 
     dev: commonTasks.webpackDevConfig({
         resolve,
@@ -89,7 +80,7 @@ module.exports = {
         entries: 'examples/*.jsx'
     }), // dev
 
-    test: {
+    test: commonTasks.webpackThemeConfig({ stubResources: true }, {
         resolve: Object.assign({}, resolve, { alias: {
             "windowStub": require.resolve("./window-stub.js"),
             "documentStub": require.resolve("./document-stub.js")
@@ -112,14 +103,12 @@ module.exports = {
 
         module: {
             loaders: [
-                babelLoader,
-                commonTasks.inlineSassLoader,
-                { test: /\.(ttf|eot|svg|woff|woff2|jpe?g|png|gif|svg)$/i, loader: require.resolve('./stub-loader.js') }
+                babelLoader
             ]
         }
-    }, // test
+    }), // test
 
-    e2e: {
+    e2e: commonTasks.webpackThemeConfig({ stubResources: true }, {
         resolve: {
             cache: false,
             fallback: resolve.fallback,
@@ -140,9 +129,7 @@ module.exports = {
             ],
             loaders: [
                 babelLoader,
-                { test: /\.json$/, loader: require.resolve('json-loader') },
-                { test: /\.(ttf|eot|svg|woff|woff2|jpe?g|png|gif|svg)$/i, loader: require.resolve('./stub-loader.js') },
-                commonTasks.inlineSassLoader
+                { test: /\.json$/, loader: require.resolve('json-loader') }
             ]
         },
         stats: { colors: true, reasons: true },
@@ -150,9 +137,9 @@ module.exports = {
         plugins: [
             new commonTasks.webpack.ContextReplacementPlugin(/\.\/e2e/, process.cwd() + '/e2e')
         ]
-    },
+    }),
 
-    e2eNpmPackage: {
+    e2eNpmPackage: commonTasks.webpackThemeConfig({ stubResources: true }, {
         resolve: {
             cache: false,
             fallback: resolve.fallback,
@@ -173,9 +160,7 @@ module.exports = {
             ],
             loaders: [
                 babelLoader,
-                { test: /\.json$/, loader: require.resolve('json-loader') },
-                { test: /\.(ttf|eot|svg|woff|woff2|jpe?g|png|gif|svg)$/i, loader: require.resolve('./stub-loader.js') },
-                commonTasks.inlineSassLoader
+                { test: /\.json$/, loader: require.resolve('json-loader') }
             ]
         },
         stats: { colors: true, reasons: true },
@@ -183,7 +168,7 @@ module.exports = {
         plugins: [
             new commonTasks.webpack.ContextReplacementPlugin(/\.\/e2e/, process.cwd() + '/e2e')
         ]
-    }
+    })
 
 
 }; // module.exports
