@@ -67,7 +67,7 @@ module.exports = {
 
         output: { libraryTarget: 'commonjs2' },
 
-        externals: [ 'react', 'react-dom', 'react-addons-css-transition-group', /^\.\// ].concat(packageDependencies()),
+        externals: [ 'react', 'react-dom', 'react-addons-transition-group', 'react-addons-css-transition-group', /^\.\// ].concat(packageDependencies()),
 
         module: {
             loaders: [ babelLoader ]
