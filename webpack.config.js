@@ -28,7 +28,8 @@ const babelLoader = {
 };
 
 const packageDependencies = () => (
-    Object.keys(packageInfo["dependencies"]).filter(x => x !== "@telerik/kendo-theme-default")
+    Object.keys(packageInfo["dependencies"] || {})
+        .filter(x => x !== "@telerik/kendo-theme-default")
 );
 
 module.exports = {
