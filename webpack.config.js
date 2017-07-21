@@ -1,12 +1,24 @@
 const commonTasks = require('@telerik/kendo-common-tasks');
 const path = require('path');
 
-const sourceExtensions = [ '.jsx' ];
+const sourceExtensions = [ '.tsx', '.ts' ];
 const nodeModulesPath = path.join(__dirname, 'node_modules');
 
 const resolve = commonTasks.resolveConfig(sourceExtensions, nodeModulesPath);
 
 const packageInfo = require(path.join(process.cwd(), 'package.json'));
+
+const tsLoader = (compilerOptions, loaderOptions = {}) => ({
+    test: /\.tsx?$/,
+    exclude: /(node_modules)/,
+    loader: require.resolve('ts-loader'),
+    query: {
+        compilerOptions
+    },
+    options: Object.assign({
+        transpileOnly: true
+    }, loaderOptions)
+});
 
 const babelLoader = {
     test: /\.jsx?$/,
@@ -29,7 +41,7 @@ const babelLoader = {
 
 const packageDependencies = () => (
     Object.keys(packageInfo["dependencies"] || {})
-        .filter(x => x !== "@telerik/kendo-theme-default")
+        .filter(x => x !== "@progress/kendo-theme-default")
 );
 
 module.exports = {
@@ -41,14 +53,14 @@ module.exports = {
         externals: {
             "react": "React",
             "react-dom": "ReactDOM",
-            "react-addons-transition-group": {
-                "root": [ "React","addons", "TransitionGroup" ],
+            "react-transition-group": {
+                "root": [ "React", "TransitionGroup" ],
                 "commonjs": true,
                 "commonjs2": true,
                 "amd": true
             },
-            "react-addons-css-transition-group": {
-                "root": [ "React","addons", "CSSTransitionGroup" ],
+            "react-css-transition-group": {
+                "root": [ "React", "CSSTransitionGroup" ],
                 "commonjs": true,
                 "commonjs2": true,
                 "amd": true
@@ -68,7 +80,7 @@ module.exports = {
 
         output: { libraryTarget: 'commonjs2' },
 
-        externals: [ 'react', 'react-dom', 'react-addons-transition-group', 'react-addons-css-transition-group', /^\.\// ].concat(packageDependencies()),
+        externals: [ 'react', 'react-dom', 'react-transition-group', /^\.\// ].concat(packageDependencies()),
 
         module: {
             loaders: [ babelLoader ]
@@ -77,19 +89,23 @@ module.exports = {
 
     dev: commonTasks.webpackDevConfig({
         resolve,
-        loaders: [ babelLoader ],
-        entries: 'examples/*.jsx'
+        loaders: [ tsLoader({ sourceMap: true }) ],
+        entries: 'examples/**/*.tsx'
     }), // dev
 
     test: commonTasks.webpackThemeConfig({ stubResources: true }, {
-        resolve: Object.assign({}, resolve, { alias: {
-            "windowStub": require.resolve("./window-stub.js"),
-            "documentStub": require.resolve("./document-stub.js")
-        } }),
+        resolve: Object.assign({}, resolve, {
+            alias: {
+                "windowStub": require.resolve("./window-stub.js"),
+                "documentStub": require.resolve("./document-stub.js")
+            }
+        }),
 
         externals: {
+            'react/addons': true,
             'react/lib/ExecutionEnvironment': true,
-            "cheerio": "global"
+            'react/lib/ReactContext': true,
+            'react-addons-test-utils': 'react-dom'
         },
 
         plugins: [
@@ -104,7 +120,8 @@ module.exports = {
 
         module: {
             loaders: [
-                babelLoader
+                tsLoader(),
+                { test: /\.json$/, loader: require.resolve('json-loader') }
             ]
         }
     }), // test
