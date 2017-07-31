@@ -1,32 +1,17 @@
-const jasmine = require('gulp-jasmine');
+"use strict";
+
 const path = require('path');
-const specReporter = require('jasmine-spec-reporter');
-const webpackConfig = require('./webpack.config.js');
+const tsTasks = require('@progress/kendo-typescript-tasks');
 const commonTasks = require('@telerik/kendo-common-tasks');
 
 const e2eConfigPath = path.join(__dirname, 'e2e.conf.js');
 const e2eNpmConfigPath = path.join(__dirname, 'e2e-npm.conf.js');
 
-const SRC = "src/**/*.jsx";
-const TESTS = "test/**/*.jsx";
-const SRC_TESTS = [ SRC, TESTS ];
+const karmaConfigPath = path.join(__dirname, 'karma.conf.js');
+const webpackConfig = require('./webpack.config.js');
 
-module.exports = function(gulp, libraryName) {
-    commonTasks.addTasks(gulp, libraryName, SRC, webpackConfig);
-
-    gulp.task('test', () =>
-        gulp.src(TESTS)
-        .pipe(commonTasks.webpackStream(webpackConfig.test))
-        .pipe(gulp.dest('tmp/test/'))
-        .pipe(jasmine({
-            reporter: new specReporter()
-        }))
-    );
-
-    gulp.task('watch-test', () => {
-        gulp.run('test');
-        return gulp.watch(SRC_TESTS, [ 'test' ]);
-    });
+module.exports = (gulp, libraryName, compilerPath, basePath) => {
+    tsTasks(gulp, libraryName, karmaConfigPath, compilerPath, null, webpackConfig, { basePath: (basePath || ' ') });
 
     gulp.task('e2e', (done) => commonTasks.startKarma(done, e2eConfigPath, true));
 
