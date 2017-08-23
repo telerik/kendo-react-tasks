@@ -71,7 +71,13 @@ module.exports = {
         ],
 
         module: {
-            loaders: [ babelLoader ]
+            loaders: [
+                tsLoader({
+                    declaration: false
+                }, {
+                    transpileOnly: false
+                })
+            ]
         }
     }), // CDN
 
