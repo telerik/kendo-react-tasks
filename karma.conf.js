@@ -1,5 +1,7 @@
 module.exports = function(config) {
+
     const webpackConfig = require("./webpack.config.js");
+    const browser = process.env['TEST_BROWSER'] ? process.env['TEST_BROWSER'] : 'Chrome_headless';
 
     config.set({
         /*
@@ -20,7 +22,7 @@ module.exports = function(config) {
          * karma-***-launcher.
          * http://karma-runner.github.io/0.13/config/browsers.html
          */
-        browsers: [ "Chrome" ],
+        browsers: [ browser ],
 
         // Enable or disable colors in the output (reporters and logs)
         colors: true,
@@ -88,6 +90,21 @@ module.exports = function(config) {
          * If you have a different webpack.config.js file that's used for testing
          * purposes, you can specify that here.
          */
-        webpack: webpackConfig.test
+        webpack: webpackConfig.test,
+
+        // How long will Karma wait for a message from a browser before disconnecting from it (in ms).
+        browserNoActivityTimeout: 180000,
+        captureTimeout: 180000,
+        retryLimit: 5,
+        customLaunchers: {
+            Chrome_headless: {
+                base: 'Chrome',
+                flags: [
+                    '--headless',
+                    '--disable-gpu',
+                    ' --remote-debugging-port=9222'
+                ]
+            }
+        }
     });
 };
