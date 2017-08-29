@@ -54,13 +54,7 @@ module.exports = {
             "react": "React",
             "react-dom": "ReactDOM",
             "react-transition-group": {
-                "root": [ "React", "TransitionGroup" ],
-                "commonjs": true,
-                "commonjs2": true,
-                "amd": true
-            },
-            "react-css-transition-group": {
-                "root": [ "React", "CSSTransitionGroup" ],
+                "root": [ "ReactTransitionGroup" ],
                 "commonjs": true,
                 "commonjs2": true,
                 "amd": true
