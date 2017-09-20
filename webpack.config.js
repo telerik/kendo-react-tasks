@@ -94,13 +94,9 @@ module.exports = {
     }), // dev
 
     test: commonTasks.webpackThemeConfig({ stubResources: true }, {
-        resolve: Object.assign({}, resolve, {
-            alias: {
-                "windowStub": require.resolve("./window-stub.js"),
-                "documentStub": require.resolve("./document-stub.js")
-            }
-        }),
+        resolve: resolve,
 
+        //https://github.com/airbnb/enzyme/issues/503#issuecomment-258216960
         externals: {
             'react/addons': true,
             'react/lib/ExecutionEnvironment': true,
@@ -109,13 +105,6 @@ module.exports = {
         },
 
         plugins: [
-            // skin deep needs this
-            // https://github.com/glenjamin/skin-deep#errors-when-bundling
-            new commonTasks.webpack.IgnorePlugin(/ReactContext/),
-            new commonTasks.webpack.ProvidePlugin({
-                "window": "windowStub",
-                "document": "documentStub"
-            })
         ],
 
         module: {
@@ -187,6 +176,4 @@ module.exports = {
             new commonTasks.webpack.ContextReplacementPlugin(/\.\/e2e/, process.cwd() + '/e2e')
         ]
     })
-
-
-}; // module.exports
+};

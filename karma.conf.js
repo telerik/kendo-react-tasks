@@ -97,7 +97,7 @@ module.exports = function(config) {
         captureTimeout: 180000,
         retryLimit: 5,
         customLaunchers: {
-            Chrome_headless: {
+            'Chrome_headless': {
                 base: 'Chrome',
                 flags: [
                     '--headless',
