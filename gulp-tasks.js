@@ -4,6 +4,7 @@ const path = require('path');
 const tsTasks = require('@progress/kendo-typescript-tasks');
 const selenium = require('selenium-standalone');
 const seleniumConfig = require('./selenium.conf.js');
+const nightwatch = './node_modules/.bin/nightwatch';
 
 const karmaConfigPath = path.join(__dirname, 'karma.conf.js');
 const webpackConfig = require('./webpack.config.js');
@@ -19,19 +20,20 @@ module.exports = (gulp, libraryName, compilerPath, basePath) => {
                 console.log(`Error installing selenium standalone server and chrome drivers ${err}`);
                 done(1);
             } else {
+                const command = process.platform === 'win32' ? `${nightwatch}.cmd` : nightwatch;
                 console.log(`Starting Nightwatch with E2E tests`);
                 const { spawn } = require('child_process');
-                const ls = spawn('./node_modules/.bin/nightwatch', [ '-c', path.join(__dirname, './nightwatch.conf.js') ]);
+                const nightwatchProcess = spawn(path.resolve(command), [ '-c', path.join(__dirname, './nightwatch.conf.js') ]);
 
-                ls.stdout.on('data', (data) => {
+                nightwatchProcess.stdout.on('data', (data) => {
                     console.log(`${data}`);
                 });
 
-                ls.stderr.on('data', (data) => {
+                nightwatchProcess.stderr.on('data', (data) => {
                     console.log(`${data}`);
                 });
 
-                ls.on('close', (code) => {
+                nightwatchProcess.on('close', (code) => {
                     console.log(`Nightwatch exited with code ${code}`);
                     done(code);
                 });
