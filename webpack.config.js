@@ -175,5 +175,15 @@ module.exports = {
         plugins: [
             new commonTasks.webpack.ContextReplacementPlugin(/\.\/e2e/, process.cwd() + '/e2e')
         ]
+    }),
+
+    systemjs: commonTasks.webpackThemeConfig({ extract: true }, {
+        resolve,
+
+        stats: { assets: false },
+
+        module: {
+            loaders: [ tsLoader({ declaration: false }) ]
+        }
     })
 };
