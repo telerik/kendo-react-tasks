@@ -20,6 +20,11 @@ const tsLoader = (compilerOptions, loaderOptions = {}) => ({
     }, loaderOptions)
 });
 
+const jsonLoader = {
+    test: /\.json$/i,
+    loader: require.resolve('json-loader')
+};
+
 const babelLoader = {
     test: /\.jsx?$/,
     exclude: /(node_modules|bower_components)/,
@@ -45,6 +50,7 @@ const packageDependencies = () => (
 );
 
 module.exports = {
+    /* Configuration for package's CDN distribution */
     CDN: commonTasks.webpackThemeConfig({ extract: true }, {
         resolve,
 
@@ -73,28 +79,50 @@ module.exports = {
                 })
             ]
         }
-    }), // CDN
+    }),
 
+    /* Configuration for package's SystemJS distribution */
+    systemjs: commonTasks.webpackThemeConfig({ extract: true }, {
+        resolve,
+
+        stats: { assets: false },
+
+        module: {
+            loaders: [ tsLoader({ declaration: false }) ]
+        }
+    }),
+
+    /* Configuration used for local documentation examples */
     npmPackage: commonTasks.webpackThemeConfig({ extract: true }, {
         resolve,
 
-        output: { libraryTarget: 'commonjs2' },
+        output: { libraryTarget: 'commonjs' },
 
-        externals: [ 'react', 'react-dom', 'react-transition-group', /^\.\// ].concat(packageDependencies()),
+        externals: [
+            'react',
+            'react-dom',
+            'react-transition-group', /^\.\//
+        ].concat(packageDependencies()),
 
         module: {
-            loaders: [ babelLoader ]
+            preLoaders: [ jsonLoader ],
+            loaders: [ tsLoader({ sourceMap: true }) ]
         }
-    }), // npmPackage
+    }),
 
+    /* Configuration used for the local examples */
     dev: commonTasks.webpackDevConfig({
         resolve,
+        preLoaders: [ jsonLoader ],
         loaders: [ tsLoader({ sourceMap: true }) ],
         entries: 'examples/**/*.tsx'
-    }), // dev
+    }),
 
+    /* Configuration used for the unit tests */
     test: commonTasks.webpackThemeConfig({ stubResources: true }, {
         resolve: resolve,
+
+        stats: { assets: false },
 
         //https://github.com/airbnb/enzyme/issues/503#issuecomment-258216960
         externals: {
@@ -113,8 +141,9 @@ module.exports = {
                 { test: /\.json$/, loader: require.resolve('json-loader') }
             ]
         }
-    }), // test
+    }),
 
+    /* Deprecated configuration, to be removed */
     e2e: commonTasks.webpackThemeConfig({ stubResources: true }, {
         resolve: {
             cache: false,
@@ -146,6 +175,7 @@ module.exports = {
         ]
     }),
 
+    /* Deprecated configuration, to be removed */
     e2eNpmPackage: commonTasks.webpackThemeConfig({ stubResources: true }, {
         resolve: {
             cache: false,
@@ -175,15 +205,5 @@ module.exports = {
         plugins: [
             new commonTasks.webpack.ContextReplacementPlugin(/\.\/e2e/, process.cwd() + '/e2e')
         ]
-    }),
-
-    systemjs: commonTasks.webpackThemeConfig({ extract: true }, {
-        resolve,
-
-        stats: { assets: false },
-
-        module: {
-            loaders: [ tsLoader({ declaration: false }) ]
-        }
     })
 };
