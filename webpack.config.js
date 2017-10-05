@@ -57,13 +57,23 @@ module.exports = {
         output: { libraryTarget: 'umd' },
 
         externals: {
-            "react": "React",
-            "react-dom": "ReactDOM",
+            "react": {
+                "root": 'React',
+                "commonjs": 'react',
+                "commonjs2": 'react',
+                "amd": 'react'
+            },
+            "react-dom": {
+                "root": "ReactDOM",
+                "commonjs": 'react-dom',
+                "commonjs2": 'react-dom',
+                "amd": 'react-dom'
+            },
             "react-transition-group": {
-                "root": [ "ReactTransitionGroup" ],
-                "commonjs": true,
-                "commonjs2": true,
-                "amd": true
+                "root": "ReactTransitionGroup",
+                "commonjs": 'react-transition-group',
+                "commonjs2": 'react-transition-group',
+                "amd": 'react-transition-group'
             }
         },
         plugins: [
