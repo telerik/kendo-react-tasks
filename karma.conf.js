@@ -36,7 +36,7 @@ module.exports = function(config) {
          * determines the order in which files are included in the browser.
          * http://karma-runner.github.io/0.13/config/files.html
          */
-        files: [ 'test/*.tsx' ],
+        files: [ 'test/**/*.ts*' ],
 
         /*
          * List of test frameworks you want to use. For example, if you want to
@@ -65,7 +65,7 @@ module.exports = function(config) {
          * npm module to be npm installed and added to the "plugins" field.
          */
         preprocessors: {
-            'test/*.tsx': [ 'webpack', 'sourcemap' ]
+            'test/**/*.ts*': [ 'webpack', 'sourcemap' ]
         },
 
         /*
