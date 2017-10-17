@@ -23,7 +23,7 @@ module.exports = (gulp, libraryName, compilerPath, basePath) => {
                 const command = process.platform === 'win32' ? `${nightwatch}.cmd` : nightwatch;
                 console.log(`Starting Nightwatch with E2E tests`);
                 const { spawn } = require('child_process');
-                const nightwatchProcess = spawn(path.resolve(command), [ '-c', path.join(__dirname, './nightwatch.conf.js') ]);
+                const nightwatchProcess = spawn(path.resolve(command), [ '-c', path.join(__dirname, './nightwatch.conf.js'), ...process.argv.slice(3) ]);
 
                 nightwatchProcess.stdout.on('data', (data) => {
                     console.log(`${data}`);
