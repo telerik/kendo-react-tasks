@@ -25,25 +25,6 @@ const jsonLoader = {
     loader: require.resolve('json-loader')
 };
 
-const babelLoader = {
-    test: /\.jsx?$/,
-    exclude: /(node_modules|bower_components)/,
-    loader: require.resolve('babel-loader'),
-    plugins: [
-        require.resolve('babel-plugin-add-module-exports')
-    ],
-    query: {
-        presets: [
-            require.resolve('babel-preset-react'),
-            require.resolve('babel-preset-es2015'),
-            require.resolve('babel-preset-stage-1') // Note: stage-1 should be after es2015 in order to work
-        ],
-        plugins: [
-            require.resolve('babel-plugin-transform-object-assign')
-        ]
-    }
-};
-
 const packageDependencies = () => (
     Object.keys(packageInfo["dependencies"] || {})
         .filter(x => x !== "@progress/kendo-theme-default")
@@ -151,69 +132,5 @@ module.exports = {
                 { test: /\.json$/, loader: require.resolve('json-loader') }
             ]
         }
-    }),
-
-    /* Deprecated configuration, to be removed */
-    e2e: commonTasks.webpackThemeConfig({ stubResources: true }, {
-        resolve: {
-            cache: false,
-            fallback: resolve.fallback,
-            alias: {
-                "./e2e": process.cwd() + "/e2e",
-                "e2e-utils": require.resolve("./e2e-utils.js"),
-                [packageInfo.name]: '../src/main'
-            },
-            extensions: [ '', '.jsx', '.js', '.json', '.scss' ]
-        },
-        devtool: 'inline-source-map',
-        module: {
-            preLoaders: [
-                {
-                    test: /\.js$/,
-                    loader: require.resolve("source-map-loader")
-                }
-            ],
-            loaders: [
-                babelLoader,
-                { test: /\.json$/, loader: require.resolve('json-loader') }
-            ]
-        },
-        stats: { colors: true, reasons: true },
-        debug: false,
-        plugins: [
-            new commonTasks.webpack.ContextReplacementPlugin(/\.\/e2e/, process.cwd() + '/e2e')
-        ]
-    }),
-
-    /* Deprecated configuration, to be removed */
-    e2eNpmPackage: commonTasks.webpackThemeConfig({ stubResources: true }, {
-        resolve: {
-            cache: false,
-            fallback: resolve.fallback,
-            alias: {
-                "./e2e": process.cwd() + "/e2e",
-                "e2e-utils": require.resolve("./e2e-utils.js"),
-                [packageInfo.name]: '../dist/npm/js/main'
-            },
-            extensions: [ '', '.jsx', '.js', '.json', '.scss' ]
-        },
-        devtool: 'inline-source-map',
-        module: {
-            preLoaders: [
-                {
-                    test: /\.js$/,
-                    loader: require.resolve("source-map-loader")
-                }
-            ],
-            loaders: [
-                babelLoader,
-                { test: /\.json$/, loader: require.resolve('json-loader') }
-            ]
-        },
-        stats: { colors: true, reasons: true },
-        debug: false,
-        plugins: [
-            new commonTasks.webpack.ContextReplacementPlugin(/\.\/e2e/, process.cwd() + '/e2e')
-        ]
     })
 };

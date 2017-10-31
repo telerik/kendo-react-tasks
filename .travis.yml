@@ -5,9 +5,6 @@ cache:
     - node_modules
 notifications:
   email: false
-  slack:
-    on_success: never
-    secure: QFMZSJNCI5H5xzoIcDbJfzgR9AH7FuBD4tOyqRr/FMfEm1mV5eInvgUSmz0xFN3TpDMwJXKi41mrquK6/ey3DEgI0Jm5M32FTis+HahXp3R6zamD7+6Y0WaTxhILcULPqJVo2Ce4WtMqbmrEyk2xLFSYPhFt9wPna9aFO4j+OZw=
 node_js:
   - '6'
 env:
@@ -25,6 +22,8 @@ before_install:
 before_script:
   - git fetch origin refs/heads/master:refs/remotes/origin/master
   - npm prune
+script:
+  - npm run lint
 after_success:
   - npm run semantic-release
 branches:
