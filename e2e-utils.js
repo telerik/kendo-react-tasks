@@ -1,4 +1,3 @@
-/*eslint no-var: 0 */
 function withRoot(closure) {
     return function() {
         const root = document.createElement('div');
@@ -16,6 +15,6 @@ function withRoot(closure) {
 }
 
 module.exports = {
-    "withRoot": withRoot
+    withRoot
 };
 
