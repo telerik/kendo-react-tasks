@@ -36,6 +36,17 @@ module.exports = (function() {
                 "desiredCapabilities": {
                     "browserName": "chrome"
                 }
+            },
+            "parallel": {
+                "desiredCapabilities": {
+                    "browserName": "chrome"
+                },
+                "test_workers": {
+                    "enabled": true,
+                    "workers": "auto"
+                },
+                "skip_testcases_on_fail": false,
+                "parallel_process_delay": 20
             }
         }
     };
