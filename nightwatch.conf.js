@@ -1,4 +1,7 @@
 const path = require('path');
+const chromeDriverPath = process.env.CHROME_DRIVER
+    || require.resolve('selenium-standalone/.selenium/chromedriver/2.32-x64-chromedriver');
+
 
 module.exports = (function() {
     const settings = {
@@ -15,7 +18,7 @@ module.exports = (function() {
             "server_path": require.resolve('selenium-standalone/.selenium/selenium-server/3.5.3-server.jar'),
             "log_path": "",
             "cli_args": {
-                "webdriver.chrome.driver": require.resolve('selenium-standalone/.selenium/chromedriver/2.32-x64-chromedriver')
+                "webdriver.chrome.driver": chromeDriverPath
             }
         },
         "test_settings": {
