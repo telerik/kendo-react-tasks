@@ -33,7 +33,8 @@ module.exports = (function() {
                 "desiredCapabilities": {
                     "browserName": "chrome",
                     "marionette": true
-                }
+                },
+                "exclude": [ "./utils/**/*.*" ]
             },
             "chrome": {
                 "desiredCapabilities": {
