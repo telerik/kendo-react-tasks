@@ -2,14 +2,14 @@ const path = require('path');
 const chromeDriverPath = process.env.CHROME_DRIVER
     || require.resolve('selenium-standalone/.selenium/chromedriver/2.32-x64-chromedriver');
 const chromeBinPath = process.env.CHROME_BIN;
-let desiredCapabilities =  {
+let desiredCapabilities = {
     "browserName": "chrome"
 };
-if(chromeBinPath){
+if (chromeBinPath) {
     desiredCapabilities.chromeOptions = {
         'binary': chromeBinPath,
-        'args': ['--disable-gpu','--privileged', '--no-sandbox']
-    }
+        'args': [ '--disable-gpu', '--privileged', '--no-sandbox' ]
+    };
 }
 
 module.exports = (function() {
