@@ -43,7 +43,7 @@ module.exports = (function() {
                 },
                 "launch_url": `http://${localhost}`,
                 "selenium_host": localhost,
-                "silent": false,
+                "silent": true,
                 "screenshots": {
                     "enabled": false,
                     "path": ""
