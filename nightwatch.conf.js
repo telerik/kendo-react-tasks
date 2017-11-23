@@ -5,7 +5,7 @@ const chromeDriverPath = process.env.CHROME_DRIVER
     || require.resolve('selenium-standalone/.selenium/chromedriver/2.32-x64-chromedriver');
 const chromeBinPath = process.env.CHROME_BIN;
 
-console.log(localhost);
+console.log("LOCALHOST_IP: " + localhost);
 
 let desiredCapabilities = {
     "browserName": "chrome"
