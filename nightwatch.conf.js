@@ -1,7 +1,12 @@
+/* eslint no-console: 0 */
 const path = require('path');
+const localhost = process.env.LOCALHOST;
 const chromeDriverPath = process.env.CHROME_DRIVER
     || require.resolve('selenium-standalone/.selenium/chromedriver/2.32-x64-chromedriver');
 const chromeBinPath = process.env.CHROME_BIN;
+
+console.log(localhost);
+
 let desiredCapabilities = {
     "browserName": "chrome"
 };
@@ -36,8 +41,8 @@ module.exports = (function() {
                     "timeout": 30000,
                     "retry_attempts": 5
                 },
-                "launch_url": "http://localhost",
-                "selenium_host": "localhost",
+                "launch_url": `http://${localhost}`,
+                "selenium_host": localhost,
                 "silent": false,
                 "screenshots": {
                     "enabled": false,
@@ -52,9 +57,6 @@ module.exports = (function() {
                 }
             },
             "parallel": {
-                "desiredCapabilities": {
-                    "browserName": "chrome"
-                },
                 "test_workers": {
                     "enabled": true,
                     "workers": "auto"
