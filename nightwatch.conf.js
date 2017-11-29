@@ -49,7 +49,8 @@ module.exports = (function() {
                     "path": ""
                 },
                 "desiredCapabilities": desiredCapabilities,
-                "exclude": [ "./utils/**/*.*" ]
+                "exclude": [ "./utils/**/*.*" ],
+                "skip_testcases_on_fail": false
             },
             "chrome": {
                 "desiredCapabilities": {
