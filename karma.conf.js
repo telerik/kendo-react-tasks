@@ -36,7 +36,7 @@ module.exports = function(config) {
          * determines the order in which files are included in the browser.
          * http://karma-runner.github.io/0.13/config/files.html
          */
-        files: [ 'test/**/*.ts*' ],
+        files: [ 'test/**/*' ],
 
         /*
          * List of test frameworks you want to use. For example, if you want to
@@ -65,7 +65,7 @@ module.exports = function(config) {
          * npm module to be npm installed and added to the "plugins" field.
          */
         preprocessors: {
-            'test/**/*.ts*': [ 'webpack', 'sourcemap' ]
+            'test/**/*': [ 'webpack', 'sourcemap' ]
         },
 
         /*
@@ -105,6 +105,11 @@ module.exports = function(config) {
                     ' --remote-debugging-port=9222'
                 ]
             }
+        },
+        // Otherwise ts tests are not detected by chrome.
+        // https://stackoverflow.com/questions/41014151/karma-tests-fail-in-chrome-but-pass-in-phantomjs/41054760
+        mime: {
+            'text/x-typescript': [ 'ts', 'tsx' ]
         }
     });
 };
