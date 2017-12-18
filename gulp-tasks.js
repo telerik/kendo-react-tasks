@@ -13,6 +13,7 @@ const nightwatch = './node_modules/.bin/nightwatch';
 const apiConfig = { warningsAsErrors: false };
 const karmaConfigPath = path.join(__dirname, 'karma.conf.js');
 const webpackConfig = require('./webpack.config.js');
+const docsServer = require('@telerik/kendo-common-tasks/docs-server');
 
 /* eslint-disable no-console */
 module.exports = (gulp, libraryName, compilerPath, basePath) => {
@@ -54,4 +55,11 @@ module.exports = (gulp, libraryName, compilerPath, basePath) => {
     });
 
     gulp.task('watch-e2e', () => gulp.watch('e2e/**/*.*', [ 'e2e' ]));
+
+    gulp.task('docs', [ 'lint-slugs', 'build-cdn' ], (done) => docsServer(libraryName, (browserSync) => {
+        gulp.watch("docs/**/*.{md,hbs}", [ 'lint-slugs' ]).on('change', browserSync.reload);
+        gulp.watch("public/**/*.{css,js}").on('change', browserSync.reload);
+        gulp.watch("dist/cdn/**/*.{css,js}").on('change', browserSync.reload);
+        gulp.watch("src/**/*.{ts,tsx}", [ "build-cdn" ]);
+    }, done));
 };
