@@ -73,7 +73,18 @@ module.exports = function(config) {
          * use the karma-mocha-reporter, you must npm install the module and
          * include it in the list of plugins.
          */
-        reporters: [ "progress" ],
+        reporters: [ "mocha" ],
+
+         // reporter options
+        mochaReporter: {
+            output: 'minimal',
+            colors: {
+                success: 'blue',
+                info: 'bgGreen',
+                warning: 'cyan',
+                error: 'bgRed'
+            }
+        },
 
         /*
          * If true, Karma will start and capture all configured browsers, run
@@ -91,6 +102,11 @@ module.exports = function(config) {
          * purposes, you can specify that here.
          */
         webpack: webpackConfig.test,
+
+        /*
+         * This field specifies webpackMiddleware specific configuration.
+         */
+        webpackMiddleware: { stats: 'errors-only' },
 
         // How long will Karma wait for a message from a browser before disconnecting from it (in ms).
         browserNoActivityTimeout: 180000,
