@@ -6,11 +6,7 @@ const tsTasks = require('@progress/kendo-typescript-tasks');
 const selenium = require('selenium-standalone');
 const seleniumConfig = require('./selenium.conf.js');
 const nightwatch = './node_modules/.bin/nightwatch';
-/**
-* Add more relaxing options when generating api-docs,
-* temporary solves the problem with the missing return type for the React.Component methods.
-*/
-const apiConfig = { warningsAsErrors: false };
+const apiConfig = require('./api.conf.js');
 const karmaConfigPath = path.join(__dirname, 'karma.conf.js');
 const webpackConfig = require('./webpack.config.js');
 const docsServer = require('@telerik/kendo-common-tasks/docs-server');
