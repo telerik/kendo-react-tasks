@@ -1,7 +1,7 @@
 const inheritanceMessage = 'Subclass of [React.Component](https://reactjs.org/docs/react-component.html).';
-
+const componentRegExp = new RegExp('^(Pure)?Component$');
 const reactMembers = [ 'context', 'refs', 'state', 'forceUpdate', 'setState',
-    'componentDidCatch', 'componentDidMount', 'componentDidUpdate', 'componentWillMount',
+    'componentDidCatch', 'componentDidMount', 'componentDidUpdate', 'componentWillMount', 'render',
     'componentWillReceiveProps', 'componentWillUnmount', 'componentWillUpdate', 'shouldComponentUpdate' ];
 
 function isInheritedMember(member) {
@@ -14,7 +14,7 @@ function isInheritedMember(member) {
 
 function isComponent(member) {
     return member.kindString === "Class" &&
-        (member.extendedTypes || []).some(c => c.name === 'Component');
+        (member.extendedTypes || []).some(c => componentRegExp.test(c.name));
 }
 
 function toReactComponentModel(model) {
