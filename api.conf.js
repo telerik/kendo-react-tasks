@@ -20,7 +20,10 @@ function isComponent(member) {
 function toReactComponentModel(model) {
     model.kind = 'component';
     model.platform = 'react';
-    model.commentSuffix = inheritanceMessage;
+
+    model.comment = model.comment || {};
+    model.comment.shortText = inheritanceMessage +
+        (model.comment.shortText ? '\n\n' + model.comment.shortText : '');
 
     const children = model.children;
     for (let i = children.length - 1; i >= 0; i--) {
