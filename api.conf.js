@@ -27,8 +27,11 @@ function toReactComponentModel(model) {
 
     const children = model.children;
     for (let i = children.length - 1; i >= 0; i--) {
-        if (isInheritedMember(children[i])) {
+        const child = children[i];
+        if (isInheritedMember(child)) {
             children.splice(i, 1);
+        } else if (child.name === 'props' && !child.comment) {
+            child.comment = { shortText: `${model.name} Component props.` };
         }
     }
 }
