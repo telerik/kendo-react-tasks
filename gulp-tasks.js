@@ -10,10 +10,12 @@ const apiConfig = require('./api.conf.js');
 const karmaConfigPath = path.join(__dirname, 'karma.conf.js');
 const webpackConfig = require('./webpack.config.js');
 const docsServer = require('@telerik/kendo-common-tasks/docs-server');
+const deepAssign = require('lodash.merge');
 
 /* eslint-disable no-console */
-module.exports = (gulp, libraryName, compilerPath, basePath) => {
-    tsTasks(gulp, libraryName, karmaConfigPath, compilerPath, apiConfig, webpackConfig, { basePath: (basePath || ' ') });
+module.exports = (gulp, libraryName, compilerPath, basePath, options = {}) => { // eslint-disable-line max-params
+    const apiOptions = deepAssign({}, apiConfig, options.apiConfig);
+    tsTasks(gulp, libraryName, karmaConfigPath, compilerPath, apiOptions, webpackConfig, { basePath: (basePath || ' ') });
 
     gulp.task('e2e', (done) => {
         console.log(`Installing selenium standalone server and chrome web driver`);
