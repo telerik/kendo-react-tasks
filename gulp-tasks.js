@@ -17,4 +17,12 @@ module.exports = (gulp, libraryName, compilerPath, basePath, options = {}) => { 
             .pipe(webpackStream(config, webpack))
             .pipe(gulp.dest('dist/cdn/js'));
     });
+
+    // gulp.task('docs', [ 'lint-slugs', 'build-cdn' ], (done) => docsServer(libraryName, (browserSync) => {
+    gulp.task('docs', [ 'build-cdn' ], (done) => docsServer(libraryName, (browserSync) => {
+        // gulp.watch("docs/**/*.{md,hbs}", [ 'lint-slugs' ]).on('change', browserSync.reload);
+        // gulp.watch("public/**/*.{css,js}").on('change', browserSync.reload);
+        // gulp.watch("dist/cdn/**/*.{css,js}").on('change', browserSync.reload);
+        // gulp.watch("src/**/*.{ts,tsx}", [ "build-cdn" ]);
+    }, done));
 };
