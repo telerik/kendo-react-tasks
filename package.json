@@ -19,7 +19,6 @@
     "enzyme": "^3.1.0",
     "enzyme-adapter-react-16": "^1.0.1",
     "karma-mocha-reporter": "^2.2.5",
-    "lodash.merge": "^4.6.0",
     "nightwatch": "^0.9.16",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
@@ -28,7 +27,8 @@
     "ts-loader": "^4.0.1",
     "uglifyjs-webpack-plugin": "^1.2.3",
     "webpack": "^4.1.1",
-    "webpack-stream": "^4.0.2"
+    "webpack-stream": "^4.0.2",
+    "lodash": "^4.17.5"
   },
   "author": "Telerik",
   "license": "Apache-2.0",
