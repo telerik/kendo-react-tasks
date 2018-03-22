@@ -1,16 +1,19 @@
-var webpack = require('webpack');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+'use strict';
+
+const path = require('path');
+const pkg = require(path.resolve('./package.json'));
 
 module.exports = {
     mode: 'production',
     module: {
         rules: [{
             test: /\.tsx?$/,
-            use: [{ loader: 'ts-loader', options: { transpileOnly: true } }]
+            use: [{ loader: require.resolve('ts-loader'), options: { transpileOnly: true } }]
         }]
     },
     resolve: {
-        extensions: ['.js', '.tsx', '.ts']
+        extensions: ['.js', '.tsx', '.ts'],
+        alias: { [pkg.name]: path.resolve('./src/main') }
     },
     output: {
         libraryTarget: 'umd'
@@ -42,8 +45,5 @@ module.exports = {
         }
     },
     plugins: [
-        // Not sure whether uglify is needed. It slows down the bundling a lot
-        // and the bundles' sizes are almost equal.
-        new UglifyJsPlugin()
     ]
 };
