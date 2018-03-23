@@ -1,30 +1,12 @@
 "use strict";
 
-const deepAssign = require('lodash.merge');
-
-const apiConfig = require('./api.conf.js');
-const registerStartTask = require('./tasks/start');
-const registerDocsTasks = require('./tasks/docs');
-const registerE2ETasks = require('./tasks/e2e');
-const registerCompileTasks = require('./tasks/compile');
-const docsServer = require('@telerik/kendo-common-tasks/docs-server');
-const lintSlugsTask = require('@telerik/kendo-common-tasks/lint-slugs');
-const apiTasks = require('@progress/kendo-typescript-tasks/api');
-
-
 const path = require('path');
 const fs = require('fs');
 const selenium = require('selenium-standalone');
-const seleniumConfig = require('./selenium.conf.js');
-const nightwatch = './node_modules/.bin/nightwatch';
+const seleniumConfig = require('./../selenium.conf');
+const nightwatch = './../node_modules/.bin/nightwatch';
 
-
-module.exports = (gulp, libraryName, compilerPath, basePath, options = {}) => {
-    registerCompileTasks(gulp, compilerPath);
-    registerDocsTasks(gulp, libraryName, options);
-    registerStartTask(gulp, libraryName);
-    // registerE2ETasks(gulp);
-
+module.exports = function registerE2ETasks(gulp) {
     gulp.task('e2e', (done) => {
         console.log(`Installing selenium standalone server and chrome web driver`);
         selenium.install(seleniumConfig, (err) => {
@@ -42,7 +24,8 @@ module.exports = (gulp, libraryName, compilerPath, basePath, options = {}) => {
 
                 console.log(`Starting Nightwatch with E2E tests`);
                 const { spawn } = require('child_process');
-                const nightwatchProcess = spawn(nightwatchPath, [ '-c', path.join(__dirname, './nightwatch.conf.js'), ...process.argv.slice(3) ]);
+                // TODO: Nightwatch gets fired, just check whether the config is read.
+                const nightwatchProcess = spawn(nightwatchPath, [ '-c', path.join(__dirname, './../nightwatch.conf.js'), ...process.argv.slice(3) ]);
 
                 nightwatchProcess.stdout.on('data', (data) => {
                     console.log(`${data}`);
@@ -60,6 +43,5 @@ module.exports = (gulp, libraryName, compilerPath, basePath, options = {}) => {
         });
     });
 
-    lintSlugsTask(gulp);
-    apiTasks(gulp, deepAssign({}, apiConfig, options.apiConfig));
-};
+    gulp.task('watch-e2e', () => gulp.watch('e2e/**/*.*', [ 'e2e' ]));
+}
