@@ -1,5 +1,5 @@
 "use strict";
-``
+
 const path = require('path');
 const fs = require('fs');
 const selenium = require('selenium-standalone');
@@ -24,6 +24,7 @@ module.exports = function registerE2ETasks(gulp) {
 
                 console.log(`Starting Nightwatch with E2E tests`);
                 const { spawn } = require('child_process');
+                // TODO: Nightwatch gets fired, just check whether the config is read.
                 const nightwatchProcess = spawn(nightwatchPath, [ '-c', path.join(__dirname, './../nightwatch.conf.js'), ...process.argv.slice(3) ]);
 
                 nightwatchProcess.stdout.on('data', (data) => {

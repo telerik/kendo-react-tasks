@@ -16,7 +16,7 @@ module.exports = {
             test: /\.tsx?$/,
             use: [{
                 loader: require.resolve('ts-loader'),
-                options: { transpileOnly: true, compilerOptions: { sourceMap: true } }
+                options: { transpileOnly: false, compilerOptions: { sourceMap: true } }
             }],
         }, {
             test: /\.scss$/,
