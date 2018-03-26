@@ -1,6 +1,6 @@
 module.exports = function(config) {
 
-    const webpackConfig = require("./webpack.config.js");
+    const webpackConfig = require("./webpack/unit-tests.config");
     const browser = process.env['TEST_BROWSER'] ? process.env['TEST_BROWSER'] : 'Chrome_headless';
 
     config.set({
@@ -54,7 +54,8 @@ module.exports = function(config) {
          * to load via the plugins configuration setting.
          */
         plugins: [
-            "karma-*"
+            "karma-webpack", "karma-sourcemap-loader", "karma-jasmine", "karma-mocha-reporter",
+            "karma-chrome-launcher", "karma-firefox-launcher", "karma-story-reporter"
         ],
 
         // The port where the Karma web server will be listening.
@@ -101,7 +102,7 @@ module.exports = function(config) {
          * If you have a different webpack.config.js file that's used for testing
          * purposes, you can specify that here.
          */
-        webpack: webpackConfig.test,
+        webpack: webpackConfig,
 
         /*
          * This field specifies webpackMiddleware specific configuration.

@@ -6,7 +6,7 @@ const selenium = require('selenium-standalone');
 const seleniumConfig = require('./../selenium.conf');
 const nightwatch = './../node_modules/.bin/nightwatch';
 
-module.exports = function registerE2ETasks(gulp) {
+module.exports = function registerE2ETestsTasks(gulp) {
     gulp.task('e2e', (done) => {
         console.log(`Installing selenium standalone server and chrome web driver`);
         selenium.install(seleniumConfig, (err) => {
@@ -24,7 +24,6 @@ module.exports = function registerE2ETasks(gulp) {
 
                 console.log(`Starting Nightwatch with E2E tests`);
                 const { spawn } = require('child_process');
-                // TODO: Nightwatch gets fired, just check whether the config is read.
                 const nightwatchProcess = spawn(nightwatchPath, [ '-c', path.join(__dirname, './../nightwatch.conf.js'), ...process.argv.slice(3) ]);
 
                 nightwatchProcess.stdout.on('data', (data) => {
