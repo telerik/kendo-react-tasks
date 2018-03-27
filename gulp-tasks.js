@@ -8,11 +8,12 @@ const registerDocsTasks = require('./tasks/docs');
 const registerE2ETestsTasks = require('./tasks/e2e-tests');
 const registerCompileTasks = require('./tasks/compile');
 const registerUnitTestsTasks = require('./tasks/unit-tests');
+const registerSystemJSTask = require('./tasks/systemjs');
+const registerBuildPackageInAllFormatsTask = require('./tasks/build-package-in-all-formats');
+
 const docsServer = require('@telerik/kendo-common-tasks/docs-server');
 const lintSlugsTask = require('@telerik/kendo-common-tasks/lint-slugs');
 const apiTasks = require('@progress/kendo-typescript-tasks/api');
-
-
 
 module.exports = (gulp, libraryName, compilerPath, basePath, options = {}) => {
     registerCompileTasks(gulp, compilerPath);
@@ -22,4 +23,6 @@ module.exports = (gulp, libraryName, compilerPath, basePath, options = {}) => {
     lintSlugsTask(gulp);
     apiTasks(gulp, deepAssign({}, apiConfig, options.apiConfig));
     registerUnitTestsTasks(gulp, basePath);
+    registerSystemJSTask(gulp, libraryName, options);
+    registerBuildPackageInAllFormatsTask(gulp);
 };

@@ -15,7 +15,7 @@ module.exports = function registerCompileTasks(gulp, compilerPath) {
         });
     };
     
-    
+    gulp.task('build-es-bundle', compile('tsconfig.es.json'));
     gulp.task('build-npm-bundle', compile('tsconfig.npm.json'));
 }
 
