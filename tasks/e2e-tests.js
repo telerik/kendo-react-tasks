@@ -4,7 +4,7 @@ const path = require('path');
 const fs = require('fs');
 const selenium = require('selenium-standalone');
 const seleniumConfig = require('./../selenium.conf');
-const nightwatch = './../node_modules/.bin/nightwatch';
+const nightwatch = './node_modules/.bin/nightwatch';
 
 module.exports = function registerE2ETestsTasks(gulp) {
     gulp.task('e2e', (done) => {
