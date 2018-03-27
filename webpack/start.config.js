@@ -58,15 +58,5 @@ module.exports = {
             }
         ),
         new webpack.HotModuleReplacementPlugin()
-        // It is used in the Angular sln in which there are no html files.
-        // new HtmlWebpackPlugin({
-        //     // template: path.resolve(`${settings.rootDir}/${settings.rootFile}`),
-        //     // template: 'C:\\Work\\react-15-03\\packages\\intl\\examples\\app.html',
-        //     template: './examples/changeLocale.html',
-        //     // filename: settings.rootFile,
-        //     filename: 'changeLocale.html',
-        //     hash: true,
-        //     chunksSortMode: 'dependency'
-        // })
     ]
 };
