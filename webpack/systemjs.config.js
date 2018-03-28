@@ -3,16 +3,16 @@
 module.exports = {
     mode: 'production',
     module: {
-        rules: [{
+        rules: [ {
             test: /\.tsx?$/,
-            use: [{
+            use: [ {
                 loader: require.resolve('ts-loader'),
                 options: { transpileOnly: false, compilerOptions: { declaration: false } }
-            }]
-        }]
+            } ]
+        } ]
     },
     resolve: {
-        extensions: ['.js', '.tsx', '.ts']
+        extensions: [ '.js', '.tsx', '.ts' ]
     },
     plugins: [
         // webpack-system-register is added dynamically.

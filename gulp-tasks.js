@@ -11,16 +11,16 @@ const registerUnitTestsTasks = require('./tasks/unit-tests');
 const registerSystemJSTask = require('./tasks/systemjs');
 const registerBuildPackageInAllFormatsTask = require('./tasks/build-package-in-all-formats');
 
-const docsServer = require('@telerik/kendo-common-tasks/docs-server');
 const lintSlugsTask = require('@telerik/kendo-common-tasks/lint-slugs');
 const apiTasks = require('@progress/kendo-typescript-tasks/api');
 
-module.exports = (gulp, libraryName, compilerPath, basePath, options = {}) => {
+/* eslint-disable no-console */
+module.exports = (gulp, libraryName, compilerPath, basePath, options = {}) => { // eslint-disable-line max-params
     registerCompileTasks(gulp, compilerPath);
-    registerDocsTasks(gulp, libraryName, options);
-    registerStartTask(gulp, libraryName);
+    registerDocsTasks(gulp, libraryName);
+    registerStartTask(gulp);
     registerE2ETestsTasks(gulp);
-    lintSlugsTask(gulp);
+    lintSlugsTask(gulp, libraryName);
     apiTasks(gulp, deepAssign({}, apiConfig, options.apiConfig));
     registerUnitTestsTasks(gulp, basePath);
     registerSystemJSTask(gulp, libraryName, options);

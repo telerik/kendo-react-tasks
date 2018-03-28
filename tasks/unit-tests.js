@@ -9,6 +9,6 @@ module.exports = function registerUnitTestsTasks(gulp, basePath) {
 
     gulp.task('watch-test', (done) =>
         startKarma(done, karmaConfigPath, false, { basePath: (basePath || ' ') }));
-}
+};
 
 

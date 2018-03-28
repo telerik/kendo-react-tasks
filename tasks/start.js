@@ -1,21 +1,21 @@
 'use strict';
 
-const express = require('express');
 const webpack = require('webpack');
 const startWebpackConfig = require('./../webpack/start.config');
 const glob = require('glob');
 const path = require('path');
 const WebpackDevServer = require('webpack-dev-server');
+const $ = require('gulp-load-plugins')();
 
 const listenAddress = process.env['LISTEN_ADDRESS'] || '0.0.0.0';
 
-module.exports = function registerStartTask(gulp, libraryName) {
-    gulp.task('start', () => {
+module.exports = function registerStartTask(gulp) {
+    gulp.task('start', (done) => {
         const config = Object.assign({}, startWebpackConfig);
 
         config.entry = addHMR('examples/**/*.tsx');
 
-        startWebpackDevServer(config);
+        startWebpackDevServer(config, done);
     });
 };
 
@@ -30,9 +30,9 @@ function addHMRCallback(entries, name) {
     ];
 
     return entries;
-};
+}
 
-function startWebpackDevServer(webpackConfig) {
+function startWebpackDevServer(webpackConfig, callback) {
     const webpackPort = 8888;
     const host = listenAddress;
 
@@ -50,19 +50,3 @@ function startWebpackDevServer(webpackConfig) {
         }
     });
 }
-
-// function startExpressServer(webpackConfig) {
-//     const app = express();
-//     const compiler = webpack(webpackConfig);
-
-//     // Tell express to use the webpack-dev-middleware and use the webpack.config.js
-//     // configuration file as a base.
-//     app.use(webpackDevMiddleware(compiler, {
-//         publicPath: webpackConfig.output.publicPath
-//     }));
-
-//     // Serve the files on port 3000.
-//     app.listen(3000, function () {
-//         console.log('Example app listening on port 3000!\n');
-//     });
-// }

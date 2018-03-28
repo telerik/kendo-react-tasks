@@ -4,16 +4,16 @@ module.exports = {
     // Development mode should be an option too.
     mode: 'production',
     module: {
-        rules: [{
+        rules: [ {
             test: /\.tsx?$/,
-            use: [{
+            use: [ {
                 loader: require.resolve('ts-loader'),
                 options: { transpileOnly: false }
-            }]
-        }]
+            } ]
+        } ]
     },
     resolve: {
-        extensions: ['.js', '.tsx', '.ts'],
+        extensions: [ '.js', '.tsx', '.ts' ]
     },
     externals: {
         'react/addons': true,

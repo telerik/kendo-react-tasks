@@ -6,17 +6,17 @@ const pkg = require(path.resolve('./package.json'));
 module.exports = {
     mode: 'production',
     module: {
-        rules: [{
+        rules: [ {
             test: /\.tsx?$/,
-            use: [{
+            use: [ {
                 loader: require.resolve('ts-loader'),
                 options: { transpileOnly: false, compilerOptions: { declaration: false } }
-            }]
-        }]
+            } ]
+        } ]
     },
     resolve: {
-        extensions: ['.js', '.tsx', '.ts'],
-        alias: { [pkg.name]: path.resolve('./src/main') }
+        extensions: [ '.js', '.tsx', '.ts' ],
+        alias: { [ pkg.name ]: path.resolve('./src/main') }
     },
     output: {
         libraryTarget: 'umd'

@@ -7,6 +7,10 @@
     "url": "https://github.com/telerik/kendo-react-tasks.git"
   },
   "main": "gulp-tasks.js",
+  "scripts": {
+    "lint": "./node_modules/.bin/eslint .",
+    "semantic-release": "semantic-release pre && semantic-prerelease publish && semantic-release post"
+  },
   "keywords": [
     "Kendo UI",
     "React"
@@ -22,6 +26,7 @@
     "enzyme": "^3.1.0",
     "enzyme-adapter-react-16": "^1.0.1",
     "glob": "^7.1.2",
+    "gulp-load-plugins": "^1.5.0",
     "karma-mocha-reporter": "^2.2.5",
     "karma-webpack": "^3.0.0",
     "lodash": "^4.17.5",
@@ -48,5 +53,28 @@
     "ghooks": "^1.0.3",
     "semantic-release": "^4.3.5",
     "validate-commit-msg": "^1.1.1"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    },
+    "ghooks": {
+      "pre-commit": "npm run lint",
+      "commit-msg": "validate-commit-msg"
+    }
+  },
+  "release": {
+    "debug": false,
+    "branchTags": {
+      "develop": "dev"
+    },
+    "fallbackTags": {
+      "dev": "latest"
+    },
+    "analyzeCommits": "@telerik/semantic-prerelease/analyzeCommits",
+    "generateNotes": "@telerik/semantic-prerelease/generateNotes",
+    "getLastRelease": "@telerik/semantic-prerelease/getLastRelease",
+    "verifyConditions": "@telerik/semantic-prerelease/verifyConditions",
+    "verifyRelease": "@telerik/semantic-prerelease/verifyRelease"
   }
 }

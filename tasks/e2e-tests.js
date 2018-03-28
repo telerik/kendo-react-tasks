@@ -6,6 +6,7 @@ const selenium = require('selenium-standalone');
 const seleniumConfig = require('./../selenium.conf');
 const nightwatch = './node_modules/.bin/nightwatch';
 
+/* eslint-disable no-console */
 module.exports = function registerE2ETestsTasks(gulp) {
     gulp.task('e2e', (done) => {
         console.log(`Installing selenium standalone server and chrome web driver`);
@@ -43,4 +44,4 @@ module.exports = function registerE2ETestsTasks(gulp) {
     });
 
     gulp.task('watch-e2e', () => gulp.watch('e2e/**/*.*', [ 'e2e' ]));
-}
+};
