@@ -1,14 +1,13 @@
 'use strict';
 
 module.exports = {
-    // Development mode should be an option too.
-    mode: 'production',
+    mode: 'development',
     module: {
         rules: [ {
             test: /\.tsx?$/,
             use: [ {
                 loader: require.resolve('ts-loader'),
-                options: { transpileOnly: false }
+                options: { }
             } ]
         } ]
     },

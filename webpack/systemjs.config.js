@@ -7,7 +7,7 @@ module.exports = {
             test: /\.tsx?$/,
             use: [ {
                 loader: require.resolve('ts-loader'),
-                options: { transpileOnly: false, compilerOptions: { declaration: false } }
+                options: { compilerOptions: { declaration: false } }
             } ]
         } ]
     },
