@@ -20,7 +20,7 @@
   },
   "dependencies": {
     "@progress/kendo-typescript-tasks": "^4.0.0",
-    "@telerik/kendo-common-tasks": "https://github.com/telerik/kendo-common-tasks.git#react-webpack4",
+    "@telerik/kendo-common-tasks": "dev",
     "@telerik/eslint-config": "1.1.0",
     "browser-sync-webpack-plugin": "^2.2.2",
     "css-loader": "^0.28.11",
