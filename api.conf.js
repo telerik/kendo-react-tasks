@@ -2,16 +2,18 @@ const inheritanceMessage = 'Subclass of [React.Component](https://reactjs.org/do
 const sfcMessage = 'A [Stateless Functional Component](https://reactjs.org/docs/components-and-props.html#functional-and-class-components)';
 const toComment = (model) => ({ shortText: `${model.name} Component props.` });
 const componentRegExp = new RegExp('^(Pure)?Component$');
-const reactMembers = [ 'context', 'refs', 'state', 'forceUpdate', 'setState',
-    'componentDidCatch', 'componentDidMount', 'componentDidUpdate', 'componentWillMount', 'render',
-    'componentWillReceiveProps', 'componentWillUnmount', 'componentWillUpdate', 'shouldComponentUpdate' ];
+const reactMembers = [ 'context', 'refs', 'state', 'forceUpdate', 'setState', 'render' ];
+const lifecycleRegExp = new RegExp("^(DeprecatedLifecycle\.|NewLifecycle\.|ComponentLifecycle\.)");
 
 function isInheritedMember(member) {
-    return member.inheritedFrom &&
-        reactMembers.some(function(name) {
-            return member.name === name &&
-                (new RegExp("^Component(Lifecycle)?\." + name + "$").test(member.inheritedFrom.name));
-        });
+    if (member.inheritedFrom === undefined) {
+        return false;
+    }
+
+    const isLifeCycle = lifecycleRegExp.test(member.inheritedFrom.name);
+    const isReactMember = (name) => (member.name === name && (new RegExp("^Component\." + name + "$").test(member.inheritedFrom.name)));
+
+    return (isLifeCycle || reactMembers.some(isReactMember));
 }
 
 function isClassComponents(member) {
