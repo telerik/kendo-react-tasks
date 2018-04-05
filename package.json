@@ -20,8 +20,8 @@
   },
   "dependencies": {
     "@progress/kendo-typescript-tasks": "^4.3.4",
-    "@telerik/kendo-common-tasks": "^3.9.2",
     "@telerik/eslint-config": "1.1.0",
+    "@telerik/kendo-common-tasks": "^3.9.2",
     "browser-sync-webpack-plugin": "^2.2.2",
     "css-loader": "^0.28.11",
     "enzyme": "^3.1.0",
@@ -44,7 +44,8 @@
     "url-loader": "^1.0.1",
     "webpack": "^4.1.1",
     "webpack-dev-server": "^3.1.1",
-    "webpack-stream": "^4.0.2"
+    "webpack-stream": "^4.0.2",
+    "yargs": "^11.0.0"
   },
   "author": "Telerik",
   "license": "Apache-2.0",
