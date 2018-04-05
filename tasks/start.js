@@ -6,6 +6,7 @@ const glob = require('glob');
 const path = require('path');
 const WebpackDevServer = require('webpack-dev-server');
 const $ = require('gulp-load-plugins')();
+const argv = require('yargs').argv;
 
 const listenAddress = process.env['LISTEN_ADDRESS'] || '0.0.0.0';
 
@@ -13,7 +14,7 @@ module.exports = function registerStartTask(gulp) {
     gulp.task('start', (done) => {
         const config = Object.assign({}, startWebpackConfig);
 
-        config.entry = addHMR('examples/**/*.tsx');
+        config.entry = addHMR(`examples/**/${argv.e || '*'}.tsx`);
 
         startWebpackDevServer(config, done);
     });
