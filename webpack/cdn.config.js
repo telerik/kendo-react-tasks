@@ -45,7 +45,8 @@ module.exports = {
             "commonjs": 'react-transition-group',
             "commonjs2": 'react-transition-group',
             "amd": 'react-transition-group'
-        }
+        },
+        "prop-types": "prop-types"
     },
     plugins: [
     ]
