@@ -3,6 +3,17 @@
 const path = require('path');
 const pkg = require(path.resolve('./package.json'));
 
+const externals = [
+    "prop-types",
+    "@progress/kendo-react-intl",
+    "@progress/kendo-drawing"
+];
+
+const reducedExternals = externals.reduce((ext, key) => {
+    ext[key] = key;
+    return ext;
+}, {});
+
 module.exports = {
     mode: 'production',
     module: {
@@ -21,7 +32,7 @@ module.exports = {
     output: {
         libraryTarget: 'umd'
     },
-    externals: {
+    externals: Object.assign({
         "react": {
             "root": 'React',
             "commonjs": 'react',
@@ -45,9 +56,8 @@ module.exports = {
             "commonjs": 'react-transition-group',
             "commonjs2": 'react-transition-group',
             "amd": 'react-transition-group'
-        },
-        "prop-types": "prop-types"
-    },
+        }
+    }, reducedExternals),
     plugins: [
     ]
 };
