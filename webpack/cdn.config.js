@@ -2,16 +2,48 @@
 
 const path = require('path');
 const pkg = require(path.resolve('./package.json'));
+const { upperFirst } = require('lodash');
+
+const splitter = /\-|\//;
+
+/* https://webpack.js.org/configuration/externals/#externals */
+const externalsTypes = [
+    "root",
+    "commonjs",
+    "commonjs2",
+    "amd"
+];
 
 const externals = [
+    "react",
+    "react-dom",
+    "react-dom/server",
+    "react-transition-group",
     "prop-types",
     "@progress/kendo-react-intl",
     "@progress/kendo-drawing"
 ];
 
-const reducedExternals = externals.reduce((ext, key) => {
-    ext[key] = key;
-    return ext;
+const reducedExternals = externals.reduce((externals, key) => {
+    externals[key] = Object.create(null);
+
+    externalsTypes.forEach(extType => {
+        if (extType === 'root') {
+            /**
+             * The UMD distributions for in-browser use expect the following format:
+             * @progress/kendo-react-intl => KendoReactIntl
+            */
+            externals[key][extType] = key
+                .split(splitter)
+                .filter(part => !part.match(/@progress|@telerik/))
+                .map(part => upperFirst(part))
+                .join('');
+        } else {
+            externals[key][extType] = key;
+        }
+    });
+
+    return externals;
 }, {});
 
 module.exports = {
@@ -32,32 +64,6 @@ module.exports = {
     output: {
         libraryTarget: 'umd'
     },
-    externals: Object.assign({
-        "react": {
-            "root": 'React',
-            "commonjs": 'react',
-            "commonjs2": 'react',
-            "amd": 'react'
-        },
-        "react-dom": {
-            "root": "ReactDOM",
-            "commonjs": 'react-dom',
-            "commonjs2": 'react-dom',
-            "amd": 'react-dom'
-        },
-        "react-dom/server": {
-            "root": "ReactDOMServer",
-            "commonjs": 'react-dom/server',
-            "commonjs2": 'react-dom/server',
-            "amd": 'react-dom/server'
-        },
-        "react-transition-group": {
-            "root": "ReactTransitionGroup",
-            "commonjs": 'react-transition-group',
-            "commonjs2": 'react-transition-group',
-            "amd": 'react-transition-group'
-        }
-    }, reducedExternals),
-    plugins: [
-    ]
+    externals: reducedExternals,
+    plugins: [ ]
 };
