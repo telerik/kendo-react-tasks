@@ -1,3 +1,5 @@
+//@ts-check
+
 'use strict';
 
 const path = require('path');
@@ -14,7 +16,7 @@ const externalsTypes = [
     "amd"
 ];
 
-const externals = [
+const externalsDependencies = [
     "react",
     "react-dom",
     "react-dom/server",
@@ -24,27 +26,21 @@ const externals = [
     "@progress/kendo-drawing"
 ];
 
-const reducedExternals = externals.reduce((externals, key) => {
-    externals[key] = Object.create(null);
+const externals = externalsDependencies.reduce((accumulator, extKey) => {
+    accumulator[extKey] = Object.create(Object.prototype);
 
     externalsTypes.forEach(extType => {
-        if (extType === 'root') {
-            /**
-             * The UMD distributions for in-browser use expect the following format:
-             * @progress/kendo-react-intl => KendoReactIntl
-            */
-            externals[key][extType] = key
-                .split(splitter)
-                .filter(part => !part.match(/@progress|@telerik/))
-                .map(part => upperFirst(part))
-                .join('');
-        } else {
-            externals[key][extType] = key;
-        }
+        /**
+         * The UMD distributions for in-browser use expect the following format:
+         * @progress/kendo-react-intl => KendoReactIntl
+        */
+        const value = extType === 'root' ? extKey.split(splitter).filter(part => !part.match(/@progress|@telerik/)).map(part => upperFirst(part)).join('') : extKey;
+
+        accumulator[extKey][extType] = value;
     });
 
-    return externals;
-}, {});
+    return accumulator;
+}, Object.create(Object.prototype));
 
 module.exports = {
     mode: 'production',
@@ -59,11 +55,11 @@ module.exports = {
     },
     resolve: {
         extensions: [ '.js', '.tsx', '.ts' ],
-        alias: { [ pkg.name ]: path.resolve('./src/main') }
+        alias: { [pkg.name]: path.resolve('./src/main') }
     },
     output: {
         libraryTarget: 'umd'
     },
-    externals: reducedExternals,
-    plugins: [ ]
+    externals: externals,
+    plugins: []
 };
