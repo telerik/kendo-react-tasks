@@ -18,7 +18,7 @@ function isInheritedMember(member) {
 
 function isClassComponents(member) {
     return member.kindString === "Class" &&
-        (member.extendedTypes || []).some(c => componentRegExp.test(c.name));
+        ((member.extendedTypes || []).some(c => componentRegExp.test(c.name)) || (member.children || []).some(c => isInheritedMember(c)));
 }
 
 const isSFComponent = (member) => {
