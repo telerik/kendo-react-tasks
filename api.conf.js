@@ -1,6 +1,6 @@
-const inheritanceMessage = 'Subclass of [React.Component](https://reactjs.org/docs/react-component.html).';
-const sfcMessage = 'A [Stateless Functional Component](https://reactjs.org/docs/components-and-props.html#functional-and-class-components)';
-const toComment = (model) => ({ shortText: `${model.name} Component props.` });
+const inheritanceMessage = 'A subclass of [React.Component](https://reactjs.org/docs/react-component.html).';
+const sfcMessage = 'A [Stateless Functional Component](https://reactjs.org/docs/components-and-props.html#functional-and-class-components).';
+const toComment = (model) => ({ shortText: `The props of the ${model.name} Component.` });
 const componentRegExp = new RegExp('^(Pure)?Component$');
 const reactMembers = [ 'context', 'refs', 'state', 'forceUpdate', 'setState', 'render' ];
 const lifecycleRegExp = new RegExp("^(DeprecatedLifecycle\.|NewLifecycle\.|ComponentLifecycle\.)");
