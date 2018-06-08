@@ -3,8 +3,6 @@
 
 An internal utility package exporting gulp tasks for the Kendo React components infrastructure.
 
- - `gulp test` - runs the unit tests (single run);
- - `gulp watch-test` - runs the unit tests in continuous mode;
  - `gulp e2e` - runs the end-to-end tests (single run);
  - `gulp watch-e2e` - runs the end-to-end tests in continuous mode;
  - `gulp build-npm-bundle` - packages the component in a format suitable for publishing as an NPM package (commonjs module)
