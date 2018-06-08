@@ -7,7 +7,6 @@ const registerStartTask = require('./tasks/start');
 const registerDocsTasks = require('./tasks/docs');
 const registerE2ETestsTasks = require('./tasks/e2e-tests');
 const registerCompileTasks = require('./tasks/compile');
-const registerUnitTestsTasks = require('./tasks/unit-tests');
 const registerSystemJSTask = require('./tasks/systemjs');
 const registerBuildPackageInAllFormatsTask = require('./tasks/build-package-in-all-formats');
 
@@ -22,7 +21,6 @@ module.exports = (gulp, libraryName, compilerPath, basePath, options = {}) => { 
     registerE2ETestsTasks(gulp);
     lintSlugsTask(gulp, libraryName);
     apiTasks(gulp, deepAssign({}, apiConfig, options.apiConfig));
-    registerUnitTestsTasks(gulp, basePath);
     registerSystemJSTask(gulp, libraryName, options);
     registerBuildPackageInAllFormatsTask(gulp);
 };
