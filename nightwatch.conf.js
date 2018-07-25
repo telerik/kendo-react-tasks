@@ -45,8 +45,10 @@ module.exports = (function() {
                 "selenium_host": localhost,
                 "silent": true,
                 "screenshots": {
-                    "enabled": false,
-                    "path": ""
+                    "enabled": true,
+                    "path": path.resolve(process.cwd(), "../../e2e-fails"),
+                    "on_failure": true,
+                    "on_error": true
                 },
                 "desiredCapabilities": desiredCapabilities,
                 "exclude": [ "./utils/**/*.*" ],
