@@ -52,7 +52,6 @@ module.exports = (function() {
                 },
                 "desiredCapabilities": desiredCapabilities,
                 "exclude": [ "./utils/**/*.*" ],
-                "end_session_on_fail": false,
                 "skip_testcases_on_fail": false
             },
             "chrome": {
@@ -65,7 +64,6 @@ module.exports = (function() {
                     "enabled": true,
                     "workers": "auto"
                 },
-                "end_session_on_fail": false,
                 "skip_testcases_on_fail": false,
                 "parallel_process_delay": 20
             }
