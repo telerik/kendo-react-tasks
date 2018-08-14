@@ -15,7 +15,7 @@ module.exports = function registerStartTask(gulp) {
     gulp.task('start', (done) => {
         const config = Object.assign({}, startWebpackConfig);
 
-        config.entry = addHMR(`examples/**/${argv.e || '*'}.tsx`);
+        config.entry = addHMR(argv.e || 'examples/**/*.tsx');
 
         startWebpackDevServer(config, done);
     });
@@ -25,7 +25,7 @@ function addHMR(path) {
     return glob.sync(path).reduce(addHMRCallback, {});
 }
 function addHMRCallback(entries, name) {
-    entries[name.replace(/^examples(\\|\/)/, '').replace(/\.(tsx?|jsx)$/, '')] = [
+    entries[name.replace(/\.(tsx?|jsx)$/, '')] = [
         devServerPath,
         devServerClientPath,
         `./${name}`

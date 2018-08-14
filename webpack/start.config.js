@@ -40,7 +40,7 @@ module.exports = {
         alias: { [ pkg.name ]: path.resolve('./src/main') }
     },
     devtool: 'cheap-module-eval-source-map',
-    output: { publicPath: '/', path: '/', filename: 'examples/[name].js' },
+    output: { publicPath: '/', path: '/', filename: '[name].js' },
     plugins: [
         new BrowserSyncPlugin(
             // BrowserSync options
