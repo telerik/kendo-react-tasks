@@ -1,4 +1,6 @@
 /* eslint no-console: 0 */
+// Nightwatch is deliberately configured to produce minimal log to combat Jenkins issue with long logs
+
 const path = require('path');
 const localhost = process.env.LOCALHOST;
 const chromeDriverPath = process.env.CHROME_DRIVER
@@ -30,7 +32,7 @@ module.exports = (function() {
         "selenium": {
             "start_process": true,
             "server_path": require.resolve('selenium-standalone/.selenium/selenium-server/3.5.3-server.jar'),
-            "log_path": "",
+            "log_path": false,
             "cli_args": {
                 "webdriver.chrome.driver": chromeDriverPath
             }
@@ -46,14 +48,15 @@ module.exports = (function() {
                 "silent": true,
                 "screenshots": {
                     "enabled": true,
-                    "path": path.resolve(process.cwd(), "../../e2e-fails"),
+                    "path": path.resolve(process.cwd(), "../../artifacts"),
                     "on_failure": true,
                     "on_error": true
                 },
                 "desiredCapabilities": desiredCapabilities,
                 "exclude": [ "./utils/**/*.*" ],
                 "end_session_on_fail": false,
-                "skip_testcases_on_fail": false
+                "skip_testcases_on_fail": false,
+                "detailed_output": false
             },
             "chrome": {
                 "desiredCapabilities": {
