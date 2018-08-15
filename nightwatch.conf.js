@@ -1,5 +1,5 @@
 /* eslint no-console: 0 */
-// Nightwatch is deliberately configured to produce minimal log to combat Jenkins issue with long logs
+// Nightwatch is configured to produce small logs as Jenkins has issues with long logs
 
 const path = require('path');
 const localhost = process.env.LOCALHOST;
