@@ -1,5 +1,6 @@
 /* eslint no-console: 0 */
 // Nightwatch is configured to produce small logs as Jenkins has issues with long logs
+// Parallel nightwatch is configured for only 2 workers, not max, so it does not overload the test machines
 
 const path = require('path');
 const localhost = process.env.LOCALHOST;
@@ -66,10 +67,8 @@ module.exports = (function() {
             "parallel": {
                 "test_workers": {
                     "enabled": true,
-                    "workers": "auto"
+                    "workers": 2
                 },
-                "end_session_on_fail": false,
-                "skip_testcases_on_fail": false,
                 "parallel_process_delay": 20
             }
         }
