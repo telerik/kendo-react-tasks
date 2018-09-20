@@ -41,7 +41,7 @@ module.exports = (function() {
         "test_settings": {
             "default": {
                 "request_timeout_options": {
-                    "timeout": 30000,
+                    "timeout": 4000,
                     "retry_attempts": 5
                 },
                 "launch_url": `http://${localhost}`,
