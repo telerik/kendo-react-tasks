@@ -33,7 +33,7 @@ module.exports = (function() {
         "selenium": {
             "start_process": true,
             "server_path": require.resolve('selenium-standalone/.selenium/selenium-server/3.5.3-server.jar'),
-            "log_path": false,
+            "log_path": path.resolve(process.cwd(), "../../artifacts"),
             "cli_args": {
                 "webdriver.chrome.driver": chromeDriverPath
             }
