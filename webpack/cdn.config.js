@@ -34,9 +34,17 @@ const externals = externalsDependencies.reduce((accumulator, extKey) => {
          * The UMD distributions for in-browser use expect the following format:
          * @progress/kendo-react-intl => KendoReactIntl
         */
-        const value = extType === 'root' ? extKey.split(splitter).filter(part => !part.match(/@progress|@telerik/)).map(part => upperFirst(part)).join('') : extKey;
+        if (extType === 'root') {
+            const value = extKey.split(splitter).filter(part => !part.match(/@progress|@telerik/)).map(part => upperFirst(part)).join('');
 
-        accumulator[extKey][extType] = value;
+            if (value.startsWith('ReactDom')) {
+                accumulator[extKey][extType] = value.replace('ReactDom', 'ReactDOM');
+            } else {
+                accumulator[extKey][extType] = value;
+            }
+        } else {
+            accumulator[extKey][extType] = extKey;
+        }
     });
 
     return accumulator;
